@@ -1,0 +1,88 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{fixltx2e,amsmath}
+\usepackage{multirow}
+\usepackage{natbib}
+
+\def\bibfontsize{\small}
+\def\authorfmt#1{\textsc{#1}}
+\def\dcuand{\&}
+\let\citeN=\citeasnoun
+
+\MakeRobust{\eqref}
+
+\bibliographystyle{apa}
+
+\linespread{1.0}
+
+\begin{document}
+
+\begin{center}
+  \textbf{\Large{Comparison of two opinion mining methods to classify opinions in online political discussions}}
+
+\vspace{5mm}
+
+\large{Hugo Hammer\footnote{hugo.hammer@hioa.no} \\
+\vspace{1mm}
+Department of Computer Science\\
+Oslo and Akershus University College of Applied Sciences}
+
+\vspace{5mm}
+
+\large{Per-Erik Solberg \\
+\vspace{1mm}
+Spr\aa kbanken\\
+The National Library of Norway}
+
+\vspace{5mm}
+
+\large{ Lilja \O vrelid\\
+\vspace{1mm}
+Department of Informatics\\
+University of Oslo}
+
+\end{center}
+
+\begin{abstract}
+Bla bla
+\end{abstract}
+
+keywords: \textit{}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Over the past years there has been an alarming growth in hate against minorities like Muslims, Jews, Gypsies and gays in Europe, driven by right wing populism parties and extremist organizations \citep{r4, r11}. A similar increase in hate speech has been observed on the Internet \citep{r6, s2}, and experts are concerned that individuals influenced by this web content may resort to violence as a result \citep{Strommen12, Sunde13}. Hateful speech is not only observed on extremst sites, but also as comments on Twitter, YouTube or online newspaper articles.  
+
+Social media and online discussions contain a wealth of information which can make us able to understand the extent of hate speech on the Internet. However, it turns out that academia is lacking research on social media and online radicalization \citep{s1}. Opinion mining is the discipline of automatically extracting opinions from a text material and may be one important tool in the understanding online radicalization. Opinion mining have mostly been analyzed toward extracting opinions in comments and reviews of commercial products, but have also been used to analyze political tweets and discussions, see e.g.  \citet{Tumasjan2010, Chen10}. Opinion mining towards political discussions is known to be hard since citations, irony and sarcasm is very common \citep{Bing12}.
+
+Opinion classification is perhaps the most studied topic within opinion mining. It aims to classify a set of text as either positive or negative and sometimes also neutral. There are mainly two approaches, one based on machine learning and one based on based on using a list of known sentiments words (lexical approach). One simple lexical approach is to count the number of words with positive and negative sentiment in the document as suggested by \citet{Hu04}. One may classify the opinion of larger documents like movie or product reviews or smaller documents like tweets, comments or sentences. See \citet{Bing12}, chapters three to five and references therein for several methods to do opinion classification. 
+
+In this paper we focus on classifying the opinion of sentences and use the lexical-based approach. Suppose we want to classify the opinion toward a keyword, say 'immigration', in a sentence containing the keyword. One intuitive approach is to also find the the words with sentiment in the sentence and classify the sentiment of the sentence based on the polarity of these sentiment words. We expect that sentiment words that is close or related to the keyword in some sense is more important than other sentiment words in the sentence as suggested by \citet{Ding08}. An other approach is to use parsing to develop dependence paths between keywords and sentiment words, see e.g. \citet{Jiang11}. The aim of this paper is to compare the method suggested in \citet{Ding08} with a suggested method based on dependence paths to classify opinions in political discussions.
+
+The paper is organized as follows. 
+
+\section{Opinion mining methods}
+\label{sec:om}
+
+\subsection{Word distance method}
+\label{sec:wd}
+
+\subsection{Dependence paths method}
+\label{sec:dp}
+
+\subsection{Measuring differences in opinion mining methods}
+\label{sec:diff}
+
+\section{Results}
+\label{sec:results}
+
+\section{Closing remarks}
+\label{sec:cr}
+
+\bibliography{bibl}
+
+\end{document}
