@@ -42,17 +42,25 @@ Social media and online discussions contain a wealth of information which can ma
 
 Opinion classification is perhaps the most studied topic within opinion mining. It aims to classify a set of text as either positive or negative and sometimes also neutral. There are mainly two approaches, one based on machine learning and one based on based on using a list of words with given sentiment scores (lexical approach). One simple lexical approach is to count the number of words with positive and negative sentiment in the document as suggested by \citet{Hu04}. One may classify the opinion of larger documents like movie or product reviews or smaller documents like tweets, comments or sentences. See \citet{Bing12}, chapters three to five and references therein for the description of several opinion classification methods. 
 
-In this paper we focus on classifying the opinion of sentences from political discussion by using the lexical-based approach. Suppose we want to classify the opinion toward a keyword, say 'immigration', in a sentence containing the keyword. One intuitive approach is to also find the the words with sentiment in the sentence and classify the sentiment of the sentence based on the polarity of these sentiment words. We expect that the importance of a keyword towards the keyword depends on the number of words between the sentiment and key word as suggested by \citet{Ding08}. An other approach is to use parsing to develop grammatical dependence paths between keywords and sentiment words, see e.g. \citet{Jiang11}. The aim of this paper is to compare the performance of a word distance method \citep{Ding08} with a developed method based on grammatical dependence paths to classify opinions in political discussions.
+In this paper we focus on classifying the opinion toward religious/political topics, say the Quran, in political discussion by using the lexical-based approach. 
+One intuitive approach is to find both the key word (e.g. Quran) and the words with sentiment in the sentence and classify the sentiment of the sentence based on the polarity of these sentiment words. We expect that statistically the importance of a sentiment word towards the keyword is related on the number of words between the sentiment and key word as suggested by \citet{Ding08}. Two other approaches is to automatically parse the material and either use the distance between key and sentiment word in the parse tree or develop grammatical dependence paths, see e.g. \citet{Jiang11}. The aim of this paper is to compare the performance of a word distance method \citep{Ding08} with a developed method based on distance in parse tree and grammatical dependence paths to classify opinions in political discussions.
 
 The paper is organized as follows. 
 
 \section{Opinion mining methods}
 \label{sec:om}
 
+In this Section we present two methods to classify sentences to either positive, neutral or negative towards a keyword. Both methods follow the same general algorithm presented below which is inspired by  \citet{Ding08}. Both keywords, sentiment words and sentiment shifters can in general appear several times in a sentence. Sentiment shifters is words that potentially shift the sentiment of a sentence from positive to negative or negative to positive. E.g. ``not happy'' have the opposite polarity than just ``happy''. We assume that we have a list of sentiment words each associated with a sentiment score representing the polarity and strength of the sentiment word. Let $kw_i, i \in \{1,2,\ldots,I\}$ represent appearance number $i$ of the keyword in the sentence. Further let $sw_{jk}, j \in \{1,2,\ldots,J\}, k \in\{1,2,\ldots,K_j\}$ be appearance number $k$ of sentiment word $j$. Thus, sentiment word $j$ appears a total of $K_j$ times in the sentence. Finally let $ss_{lm}, l \in \{1,2,\ldots,L\}, m \in\{1,2,\ldots,M_l\}$ be appearance number $m$ of sentiment shifter $l$. We compute a sentimen scoret, $S$, for the sentence as follows
+\begin{equation}
+  \label{eq:1}
+  S = \frac{1}{\ln{(IJK+1)}} \sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{K} \text{Imp}(kw_i, sw_{jk})\cdot f(sw_{jk}, \mathbf{ss})
+\end{equation}
+where $\mathbf{ss}$ represents all the appearances of sentiment shifters in the sentence. The function Imp computes the importance of the sentiment word $sw_{jk}$ on the keyword appearance $kw_i$. This will be computed in different ways as described below. Further, the function $f$ computes whether the sentiment of $sw_{jk}$ should be shifted based on the sentiment shifters in the sentence. The function returns $-1$ (sentiment shift) if some of the sentiment shifters is within $d_{p}$ words in front or $d_{n}$ words behind $sw_{jk}$, respectively. Else $f$, returns $1$. We classify the opinion towards the keyword to be positive, neutral or negative if $S >= t_p$,  $t_p > S > t_n$ and  $S <= t_n$, respectively. The parameters $d_p, d_n, t_p$ and $t_n$ is tuned using a training set.
+
 \subsection{Word distance method}
 \label{sec:wd}
 
-\subsection{Dependence paths method}
+\subsection{Parse tree method}
 \label{sec:dp}
 
 \subsection{Measuring the performance of opinion mining methods}
