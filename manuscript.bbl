@@ -1,77 +1,102 @@
 \begin{thebibliography}{}
 
-\bibitem[\protect\astroncite{Bartlett et~al.}{2013}]{s2}
-Bartlett, J., Birdwell, J., and Littler, M. (2013).
+\bibitem[\protect\citename{Bartlett \bgroup et al.\egroup }2013]{s2}
+Jamie Bartlett, Jonathan Birdwell, and Mark Littler.
+\newblock 2013.
 \newblock {T}he rise of populism in {E}urope can be traced through online
   behaviour...
 \newblock Demos,
   \url{http://www.demos.co.uk/files/Demos_OSIPOP_Book-web_03.pdf?1320601634}.
 \newblock [Online; accessed 21-January-2014].
 
-\bibitem[\protect\astroncite{Chen et~al.}{2010}]{Chen10}
-Chen, B., Zhu, L., Kifer, D., and Lee, D. (2010).
+\bibitem[\protect\citename{Chen \bgroup et al.\egroup }2010]{Chen10}
+Bi~Chen, Leilei Zhu, Daniel Kifer, and Dongwon Lee.
+\newblock 2010.
 \newblock {W}hat {I}s an {O}pinion {A}bout? {E}xploring {P}olitical
   {S}tandpoints {U}sing {O}pinion {S}coring {M}odel.
 \newblock In {\em {AAAI}}.
 
-\bibitem[\protect\astroncite{Ding et~al.}{2008}]{Ding08}
-Ding, X., Liu, B., and Yu, P.~S. (2008).
+\bibitem[\protect\citename{Ding \bgroup et al.\egroup }2008]{Ding08}
+Xiaowen Ding, Bing Liu, and Philip~S. Yu.
+\newblock 2008.
 \newblock {A} {H}olistic {L}exicon-based {A}pproach to {O}pinion {M}ining.
 \newblock In {\em {P}roceedings of the 2008 {I}nternational {C}onference on
   {W}eb {S}earch and {D}ata {M}ining}, WSDM '08, pages 231--240, New York, NY,
   USA. ACM.
 
-\bibitem[\protect\astroncite{Fekete}{2013}]{r4}
-Fekete, L. (2013).
+\bibitem[\protect\citename{Fekete}2013]{r4}
+Liz Fekete.
+\newblock 2013.
 \newblock {P}edlars of hate: {T}he violent impact of the {E}uropean far
   {R}ight.
 \newblock Institute of Race Relations,
   \url{http://www.irr.org.uk/wp-content/uploads/2012/06/PedlarsofHate.pdf}.
 \newblock [Online; accessed 21-January-2014].
 
-\bibitem[\protect\astroncite{Goodwin et~al.}{2013}]{r6}
-Goodwin, M., Ramalingam, V., and Briggs, R. (2013).
+\bibitem[\protect\citename{Goodwin \bgroup et al.\egroup }2013]{r6}
+Matthew Goodwin, Vidhya Ramalingam, and Rachel Briggs.
+\newblock 2013.
 \newblock {T}he {N}ew {R}adical {R}ight: {V}iolent and {N}on-{V}iolent
   {M}ovements in {E}urope.
 \newblock Institute for Strategic Dialogue,
   \url{http://www.strategicdialogue.org/ISD%20Far%20Right%20Feb2012.pdf}.
 \newblock [Online; accessed 21-January-2014].
 
-\bibitem[\protect\astroncite{Hu and Liu}{2004}]{Hu04}
-Hu, M. and Liu, B. (2004).
+\bibitem[\protect\citename{Hammer \bgroup et al.\egroup }2013]{Hammer13}
+Hugo Hammer, Alfred Bratterud, and Siri Fagernes.
+\newblock 2013.
+\newblock Crawling {J}avascript websites using {W}eb{K}it – with application
+  to analysis of hate speech in online discussions.
+\newblock In {\em Norwegian informatics conference}.
+
+\bibitem[\protect\citename{Hu and Liu}2004]{Hu04}
+Minqing Hu and Bing Liu.
+\newblock 2004.
 \newblock {M}ining and {S}ummarizing {C}ustomer {R}eviews.
 \newblock In {\em {P}roceedings of the {T}enth {ACM} {SIGKDD} {I}nternational
   {C}onference on {K}nowledge {D}iscovery and {D}ata {M}ining}, KDD '04, pages
   168--177, New York, NY, USA. ACM.
 
-\bibitem[\protect\astroncite{Jiang et~al.}{2011}]{Jiang11}
-Jiang, L., Yu, M., Zhou, M., Liu, X., and Zhao, T. (2011).
+\bibitem[\protect\citename{Jiang \bgroup et al.\egroup }2011]{Jiang11}
+Long Jiang, Mo~Yu, Ming Zhou, Xiaohua Liu, and Tiejun Zhao.
+\newblock 2011.
 \newblock {T}arget-dependent {T}witter {S}entiment {C}lassification.
 \newblock In {\em {P}roceedings of the 49th {A}nnual {M}eeting of the
   {A}ssociation for {C}omputational {L}inguistics: {H}uman {L}anguage
   {T}echnologies - {V}olume 1}, HLT '11, pages 151--160, Stroudsburg, PA, USA.
   Association for Computational Linguistics.
 
-\bibitem[\protect\astroncite{Liu}{2012}]{Bing12}
-Liu, B. (2012).
+\bibitem[\protect\citename{Liu}2012]{Bing12}
+Bing Liu.
+\newblock 2012.
 \newblock {\em {S}entiment {A}nalysis and {O}pinion {M}ining}.
 \newblock Synthesis Lectures on Human Language Technologies. Morgan {\&}
   Claypool Publishers.
 
-\bibitem[\protect\astroncite{Str{\o}mmen}{2012}]{Strommen12}
-Str{\o}mmen, {\O}. (2012).
+\bibitem[\protect\citename{Nielsen}2011]{Nielsen11}
+Finn~{\AA}rup Nielsen.
+\newblock 2011.
+\newblock A new {ANEW}: Evaluation of a word list for sentiment analysis in
+  microblogs.
+\newblock {\em CoRR}, abs/1103.2903.
+
+\bibitem[\protect\citename{Str{\o}mmen}2012]{Strommen12}
+{\O}yvind Str{\o}mmen.
+\newblock 2012.
 \newblock {\em {T}he {D}ark {N}et. {O}n {R}ight-{W}ing {E}xtremism,
   {C}ounter-{J}ihadism and {T}error in {E}urope}.
 \newblock Cappelen Damm.
 
-\bibitem[\protect\astroncite{Sunde}{2013}]{Sunde13}
-Sunde, I.~M. (2013).
+\bibitem[\protect\citename{Sunde}2013]{Sunde13}
+Inger~Marie Sunde.
+\newblock 2013.
 \newblock {P}reventing radicalization and violent extremism on the {I}nternet
   ({N}orwegian).
 \newblock The Norwegian Police University College 2013:1.
 
-\bibitem[\protect\astroncite{Taylor}{2013}]{s1}
-Taylor, H. (2013).
+\bibitem[\protect\citename{Taylor}2013]{s1}
+Hannah Taylor.
+\newblock 2013.
 \newblock {S}ocial {M}edia for {S}ocial {C}hange. {U}sing the {I}nternet to
   {T}ackle {I}ntolerance.
 \newblock Institute for Strategic Dialogue,
@@ -79,15 +104,17 @@ Taylor, H. (2013).
 iew&pDocumentId=46414}.
 \newblock [Online; accessed 21-January-2014].
 
-\bibitem[\protect\astroncite{Tumasjan et~al.}{2010}]{Tumasjan2010}
-Tumasjan, A., Sprenger, T.~O., Sandner, P.~G., and Welpe, I.~M. (2010).
+\bibitem[\protect\citename{Tumasjan \bgroup et al.\egroup }2010]{Tumasjan2010}
+Andranik Tumasjan, Timm~O Sprenger, Philipp~G Sandner, and Isabell~M Welpe.
+\newblock 2010.
 \newblock {P}redicting elections with twitter: {W}hat 140 characters reveal
   about political sentiment.
 \newblock In {\em {P}roceedings of the fourth international aaai conference on
   weblogs and social media}, pages 178--185.
 
-\bibitem[\protect\astroncite{Wilson and Hainsworth}{2013}]{r11}
-Wilson, R. and Hainsworth, P. (2013).
+\bibitem[\protect\citename{Wilson and Hainsworth}2013]{r11}
+Robin Wilson and Paul Hainsworth.
+\newblock 2013.
 \newblock {F}ar-right {P}arties and discourse in {E}urope: {A} challenge for
   our times.
 \newblock European network against racism,

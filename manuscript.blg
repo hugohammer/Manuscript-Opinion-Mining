@@ -1,45 +1,45 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: manuscript.aux
-The style file: apa.bst
+The style file: acl.bst
 Database file #1: bibl.bib
-You've used 13 entries,
-            1940 wiz_defined-function locations,
-            552 strings with 6635 characters,
-and the built_in function-call counts, 5015 in all, are:
-= -- 517
-> -- 189
-< -- 11
-+ -- 62
-- -- 62
-* -- 382
-:= -- 865
-add.period$ -- 48
-call.type$ -- 13
-change.case$ -- 94
-chr.to.int$ -- 13
-cite$ -- 13
-duplicate$ -- 214
-empty$ -- 334
-format.name$ -- 79
-if$ -- 1008
+You've used 15 entries,
+            2490 wiz_defined-function locations,
+            642 strings with 7768 characters,
+and the built_in function-call counts, 5838 in all, are:
+= -- 625
+> -- 214
+< -- 4
++ -- 71
+- -- 70
+* -- 364
+:= -- 927
+add.period$ -- 69
+call.type$ -- 15
+change.case$ -- 93
+chr.to.int$ -- 15
+cite$ -- 15
+duplicate$ -- 256
+empty$ -- 468
+format.name$ -- 87
+if$ -- 1265
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 9
-newline$ -- 73
-num.names$ -- 39
-pop$ -- 85
+missing$ -- 11
+newline$ -- 98
+num.names$ -- 45
+pop$ -- 134
 preamble$ -- 1
-purify$ -- 96
+purify$ -- 110
 quote$ -- 0
-skip$ -- 169
+skip$ -- 210
 stack$ -- 0
-substring$ -- 284
-swap$ -- 56
+substring$ -- 204
+swap$ -- 69
 text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 74
+type$ -- 112
 warning$ -- 0
-while$ -- 38
-width$ -- 0
-write$ -- 182
+while$ -- 42
+width$ -- 17
+write$ -- 222
