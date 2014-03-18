@@ -73,6 +73,13 @@ Bing Liu.
 \newblock Synthesis Lectures on Human Language Technologies. Morgan {\&}
   Claypool Publishers.
 
+\bibitem[\protect\citename{Nielsen}2011]{Nielsen11}
+Finn~{\AA}rup Nielsen.
+\newblock 2011.
+\newblock A new {ANEW}: Evaluation of a word list for sentiment analysis in
+  microblogs.
+\newblock {\em CoRR}, abs/1103.2903.
+
 \bibitem[\protect\citename{Str{\o}mmen}2012]{Strommen12}
 {\O}yvind Str{\o}mmen.
 \newblock 2012.
