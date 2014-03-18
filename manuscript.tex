@@ -86,29 +86,41 @@ where $\alpha \in [0,1]$ is parameter that weights the score from the important 
 Note that when $\alpha = 0$, \eqref{eq:3} reduces to \eqref{eq:4}.
 
 \subsection{Statistical analysis of classification performance}
+\label{sec:sa}
 
-We compare the classification performance of the methods above using random effect logistic regression. Let the stochastic variable $Y_{tm} \in \{0,1\}$ represents whether method $m \in 1,2,\ldots,M$ classified correct opinion to sentence number $t \in \{1,2,\ldots,T\}$, where $T$ is the number of sentences in the test set. We let $Y_{tm}, t = 1,2,\ldots,T, m = 1,2,\ldots,M$ being the 0-1 dependent variable of the regression model. 
+We compare the classification performance of a set of $M$ different methods, denoted as $\Pi_1, \Pi_2, \ldots, \Pi_M$, using a random effect logistic regression. Let the stochastic variable $Y_{tm} \in \{0,1\}$ represents whether method $\Pi_m, \, m \in \{1,2,\ldots,M\}$ classified the correct opinion to sentence number $t \in \{1,2,\ldots,T\}$, where $T$ is the number of sentences in the test set. We let $Y_{tm}$ being the dependent variable of the regression model. The different methods $\Pi_1, \Pi_2, \ldots, \Pi_M$ is included as a categorical independent variable. We also assume that classification performance of the different methods depends on the sentence to be classified, thus the sentence number therefore is included as a random effect. The model is then formulated as
+\begin{align}
+  \label{eq:5}
+  \begin{split}
+    P(Y_{tm} = 1) &= \text{logit}(\mu + \Pi_m + \epsilon_t + \epsilon_{tm}) \\
+    P(Y_{tm} = 0) &= 1 - P(Y_{tm} = 1)
+  \end{split}
+ \end{align}
+where $\epsilon_t$ is the sentence number random effect and $\epsilon_{tm}$ is additional random noise. Fitting the model to the observed classification performance of the different methods we are able to see if the probability of classifying correctly significantly vary between the methods.
+
+The statistical analysis is performed using the statistical program R \cite{R} and the R package \verb|lme4| \cite{lme4}.
+
 
 \section{Real data example}
 \label{sec:results}
 
 \subsection{Text material}
 
-We did not find any suitable annotated text material related to political discussions and therefore created our own. We manually selected 46 debate articles from the Norwegian online newspapers \textit{NRK Ytring, Dagbladet, Aftenposten, VG and Bergens Tidene}. To each debate article there were attached an discussion platform where readers could express their opinions and feelings towards the content of the debate article. All the text from the debate articles and the subsequent discussions were collected using text scraping \cite{Hammer13}. All the debate articles were related to religion and immigration and we wanted to classify the opinion towards the words with stem: \textit{islam, muslim, quran, allah, muhammed, imam and mosque}. This is typically topics that creates a lot of active discussions and disagreements.
+We did not find any suitable annotated text material related to political discussions and therefore created our own. We manually selected 46 debate articles from the Norwegian online newspapers \textit{NRK Ytring, Dagbladet, Aftenposten, VG and Bergens Tidene}. To each debate article there were attached an discussion thread where readers could express their opinions and feelings towards the content of the debate article. All the text from the debate articles and the subsequent discussions were collected using text scraping \cite{Hammer13}. The debate articles were related to religion and immigration and we wanted to classify the opinion towards all words with stem: \textit{islam, muslim, quran, allah, muhammed, imam and mosque}. These are topics that often creates a lot of active discussions and disagreements.
 
-We automatically divided the material into sentences and all sentences containing at least one keyword and one sentiment word were kept for further analysis. If a sentence contained more than one keyword, e.g. both islam and quran, the sentence were repeated one time for each keyword. We could then classify the opinion towards each of the keywords in the sentence consecutively. 
+We automatically divided the material into sentences and all sentences containing at least one keyword and one sentiment word were kept for further analysis. If a sentence contained more than one keyword, e.g. both islam and quran, the sentence were repeated one time for each keyword. We could then classify the opinion towards each of the keywords in the sentence consecutively. To assure that we do not underestimate the uncertainty in the statistical analysis, we see each repetition of the sentence as the same sentence with respect to the sentence random effect in the regression model in Section \ref{sec:sa}
 
 Each sentence were manually annotated whether the commenter were positive, negative or neutral towards the keyword in the sentence. Each sentence were evaluated individually. The sentences were annotated based on all our knowledge, e.g. a sentence like ``Muhammed is like Hitler'' would be annotated as a negative opinion towards Muhammed. Further, if a commenter presented a negative fact about the keyword, the sentence would be denoted as negative.\\
 INTERANNOTARY!!\\
 Finally the material were divided in to two parts where the first half of the debate articles with subsequent discussions where in the training set and the rest were in the test set. The researcher working on finding the important dependence paths, did only use the training set and did never see the test set before the decisions about dependence paths were decided. After the division, the training and test set consisted of a total of 382 and 308 sentences, respectively. Table \ref{tab:1} summarizes the opinions in the sentences
 \begin{table}
+  \caption{Manual annotation of training and test set.}
   \centering
   \begin{tabular}{lcccc}
              & Negative & Neutral & Positive \\\hline
     Training & 174 (46\%) & 162 (42\%) & 46 (12\%)\\
     Test     & 102 (33\%)& 182 (59\%) & 24 (8\%)
   \end{tabular}
-  \caption{Manual annotation of training and test set.}
   \label{tab:1}
 \end{table}
 
@@ -118,37 +130,38 @@ Unfortunately, no sentiment list exists for the Norwegian language and therefore
 
 Several Norwegian sentiment shifters were considered but only the basic shifter 'not' improved the opinion classification and therefore only this word were used in the method.
 
-\subsection{classification performance}
+\subsection{Classification performance}
 
-In this study we compared four different cases based on the general algorithm in \eqref{eq:1}.
+In this study we compared four different methods based on the general algorithm in \eqref{eq:1}.
 \begin{itemize}
-\item We use the \textbf{imp}-function presented in \eqref{eq:2}. We denote this case WD (word distance).
-\item For this case and the two below we use the \textbf{imp}-function in \eqref{eq:3}. Further we set $\alpha = 0$ meaning that we do not use the important dependence paths. We denote this case A0 ($\alpha = 0$).
-\item We set $\alpha = 1$ and for all dependency paths we set $W_{\mathbf{dep}} = 2/3$. We denote this case CW (constant weights).
-\item We set $\alpha = 1$ and for $W_{\mathbf{dep}}$ we use the weights presented in Table ??????. We denote this case OD (optimal use of dependence paths)
+\item We use the \textbf{imp}-function presented in \eqref{eq:2}. We denote this method WD (word distance).
+\item For this method and the two below we use the \textbf{imp}-function in \eqref{eq:3}. Further we set $\alpha = 0$ meaning that we do not use the important dependence paths. We denote this method A0 ($\alpha = 0$).
+\item We set $\alpha = 1$ and for all dependency paths we set $W_{\mathbf{dep}} = 2/3$. We denote this method CW (constant weights).
+\item We set $\alpha = 1$ and for $W_{\mathbf{dep}}$ we use the weights presented in Table ??????. We denote this method OD (optimal use of dependence paths)
 \end{itemize}
-For each case we used the training set to manually tune the parameters $d_p, d_n, t_p$ and $t_n$ of the method. The parameters were tuned to optimize the number of correct classifications.
+For each method we used the training set to manually tune the parameters $d_p, d_n, t_p$ and $t_n$ of the method. The parameters were tuned to optimize the number of correct classifications.
 
-Table \ref{tab:2} shows the optimal parameter values of $d_p, d_n, t_p$ and $t_n$ and the classification performance for different cases. 
+Table \ref{tab:2} shows the optimal parameter values of $d_p, d_n, t_p$ and $t_n$ and the classification performance for different methods. 
 \begin{table}
+  \caption{The second to the fifth column show the optimal values of the parameters of the model. The sixth column show the number of correct classifications and the last column shows the p-value that the method performs better than WD.}
   \centering
   \begin{tabular}{lcccccl}
        & $d_p$ & $d_n$ & $t_p$ & $t_n$ & Correct   & p-val \\ \hline
-    WD &    2  &   0  & 0.7  &  0.0  & 142 (46\%) & \\
-    A0 &    2  &   0  & 2.5  &  0.3  & 161 (52\%) & 0.014 *\\
-    CW &    2  &   0  & 2.5  &  0.3  & 160 (52\%) & 0.020 *\\
-    OD &    2  &   0  & 2.5  &  0.3  & 162 (53\%) & 0.009 **
+    WD &    2  &   0  & 0.7  &  0.0  & 145 (47\%) & \\
+    A0 &    2  &   0  & 2.0  &  0.3  & 161 (52\%) & 0.047 *\\
+    CW &    2  &   0  & 2.0  &  0.3  & 161 (52\%) & 0.048 *\\
+    OD &    2  &   0  & 2.0  &  0.3  & 162 (53\%) & 0.031 *
   \end{tabular}
-  \caption{The second to the fifth column show the optimal values of the parameters of the model. The sixth column show the number of correct classifications and the last column shows the p-value that the method performs better than WD. Signif. codes: p-value $<$ 0.01:\,**, \, p-value $<$ 0.05:\,*.}
   \label{tab:2}
 \end{table}
-We see that the sentiment shifter 'not' only have a positive effect on classification performance when it is in front of the sentiment word. We see that using dependence tree distances (case A0) the classification results is significantly improved compared word distance in the sentence (case WD) (p-value = 0.014). Also including the important dependence paths (case OD) further improves the classification performance, but the improvement is not significant compared to case A0.
+We see that the sentiment shifter 'not' only have a positive effect on classification performance when it is in front of the sentiment word. We see that using dependence tree distances (method A0) the classification results is significantly improved compared to using word distances in the sentence (method WD) (p-value = 0.047). Also including the important dependence paths (method OD) further improves the classification performance (p-value = 0.031).
 
 \section{Closing remarks}
 \label{sec:cr}
 
-In this paper we have analyzed if parsing can improve 
+Classifying opinions in political discussions is hard because of the frequent use of irony, sarcasm and citations. 
 
+In this paper we have compared the use of word distance between keyword and sentiment word against metrics related to parsed sentence information. 
 
 \bibliography{bibl}
 

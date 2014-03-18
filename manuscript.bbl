@@ -9,6 +9,11 @@ Jamie Bartlett, Jonathan Birdwell, and Mark Littler.
   \url{http://www.demos.co.uk/files/Demos_OSIPOP_Book-web_03.pdf?1320601634}.
 \newblock [Online; accessed 21-January-2014].
 
+\bibitem[\protect\citename{Bates \bgroup et al.\egroup }2013]{lme4}
+Douglas Bates, Martin Maechler, and Ben Bolker, 2013.
+\newblock {\em lme4: {L}inear mixed-effects models using {S}4 classes}.
+\newblock R package version 0.999999-2.
+
 \bibitem[\protect\citename{Chen \bgroup et al.\egroup }2010]{Chen10}
 Bi~Chen, Leilei Zhu, Daniel Kifer, and Dongwon Lee.
 \newblock 2010.
@@ -79,6 +84,12 @@ Finn~{\AA}rup Nielsen.
 \newblock A new {ANEW}: Evaluation of a word list for sentiment analysis in
   microblogs.
 \newblock {\em CoRR}, abs/1103.2903.
+
+\bibitem[\protect\citename{{R Core Team}}2013]{R}
+{R Core Team}, 2013.
+\newblock {\em {R}: {A} {L}anguage and {E}nvironment for {S}tatistical
+  {C}omputing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria.
 
 \bibitem[\protect\citename{Str{\o}mmen}2012]{Strommen12}
 {\O}yvind Str{\o}mmen.
