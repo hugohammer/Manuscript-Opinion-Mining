@@ -1,27 +1,24 @@
-\documentclass[a4paper, 12pt]{article}
+\documentclass[11pt]{article}
 
-\usepackage{natbib}
+\usepackage{acl2014}
+\usepackage{times}
 \usepackage{url}
+\usepackage{latexsym}
+
 \usepackage{graphicx}
 \usepackage{fixltx2e,amsmath}
 \usepackage{multirow}
-\usepackage{natbib}
-
-\def\bibfontsize{\small}
-\def\authorfmt#1{\textsc{#1}}
-\def\dcuand{\&}
-\let\citeN=\citeasnoun
 
 \MakeRobust{\eqref}
 
-\bibliographystyle{apa}
+\bibliographystyle{acl}
 
 \linespread{1.0}
 
 \begin{document}
 
 \begin{center}
-  \textbf{\Large{Comparison of two opinion mining methods to classify opinions in online political discussions}}
+  \textbf{\Large{Classifying opinions in online political discussion -- comparison of two methods}}
 
 \vspace{5mm}
 
@@ -36,38 +33,77 @@ keywords: \textit{}
 \section{Introduction}
 \label{sec:introduction}
 
-Over the past years there has been an alarming growth in hate against minorities like Muslims, Jews, Gypsies and gays in Europe, driven by right wing populism parties and extremist organizations \citep{r4, r11}. A similar increase in hate speech has been observed on the Internet \citep{r6, s2}, and experts are concerned that individuals influenced by this web content may resort to violence as a result \citep{Strommen12, Sunde13}. Hateful speech is not only observed on extremst sites, but also as comments on e.g. Twitter, YouTube and online newspaper articles.  
+Over the past years there has been an alarming growth in hate against minorities like Muslims, Jews, Gypsies and gays in Europe, driven by right wing populism parties and extremist organizations \cite{r4,r11}. A similar increase in hate speech has been observed on the Internet \cite{r6,s2}, and experts are concerned that individuals influenced by this web content may resort to violence as a result \cite{Strommen12,Sunde13}. Hateful speech is not only observed on extremst sites, but also as comments on e.g. Twitter, YouTube and online newspaper articles.  
 
-Social media and online discussions contain a wealth of information which can make us able to understand the extent of hate speech on the Internet. However, it turns out that academia is lacking research on social media and online radicalization \citep{s1}. Opinion mining is the discipline of automatically extracting opinions from a text material and may be one important tool in the understanding online radicalization. Opinion mining has mostly been used to analyze opinions in comments and reviews about commercial products, but there are also examples of opinion mining towards political tweets and discussions, see e.g. \citet{Tumasjan2010, Chen10}. Opinion mining towards political discussions is known to be hard since citations, irony and sarcasm is very common \citep{Bing12}.
+Social media and online discussions contain a wealth of information which can make us able to understand the extent of hate speech on the Internet. However, it turns out that academia is lacking research on social media and online radicalization \cite{s1}. Opinion mining is the discipline of automatically extracting opinions from a text material and may be one important tool in the understanding online radicalization. Opinion mining has mostly been used to analyze opinions in comments and reviews about commercial products, but there are also examples of opinion mining towards political tweets and discussions, see e.g. Tumasjan et al. \shortcite{Tumasjan2010}; Chen et al. \shortcite{Chen10}. Opinion mining towards political discussions is known to be hard since citations, irony and sarcasm is very common \cite{Bing12}.
 
-Opinion classification is perhaps the most studied topic within opinion mining. It aims to classify a set of text as either positive or negative and sometimes also neutral. There are mainly two approaches, one based on machine learning and one based on based on using a list of words with given sentiment scores (lexical approach). One simple lexical approach is to count the number of words with positive and negative sentiment in the document as suggested by \citet{Hu04}. One may classify the opinion of larger documents like movie or product reviews or smaller documents like tweets, comments or sentences. See \citet{Bing12}, chapters three to five and references therein for the description of several opinion classification methods. 
+Opinion classification is perhaps the most studied topic within opinion mining. It aims to classify a set of text as either positive or negative and sometimes also neutral. There are mainly two approaches, one based on machine learning and one based on based on using a list of words with given sentiment scores (lexical approach). One simple lexical approach is to count the number of words with positive and negative sentiment in the document as suggested by Hu and Liu \shortcite{Hu04}. One may classify the opinion of larger documents like movie or product reviews or smaller documents like tweets, comments or sentences. See Liu \shortcite{Bing12}, chapters three to five and references therein for the description of several opinion classification methods. 
 
 In this paper we focus on classifying the opinion toward religious/political topics, say the Quran, in political discussion by using the lexical-based approach. 
-One intuitive approach is to find both the key word (e.g. Quran) and the words with sentiment in the sentence and classify the sentiment of the sentence based on the polarity of these sentiment words. We expect that statistically the importance of a sentiment word towards the keyword is related on the number of words between the sentiment and key word as suggested by \citet{Ding08}. Two other approaches is to automatically parse the material and either use the distance between key and sentiment word in the parse tree or develop grammatical dependence paths, see e.g. \citet{Jiang11}. The aim of this paper is to compare the performance of a word distance method \citep{Ding08} with a developed method based on distance in parse tree and grammatical dependence paths to classify opinions in political discussions.
+One intuitive approach is to find both the keyword (e.g. Quran) and the words with sentiment in the sentence and classify the sentiment of the sentence based on the polarity of these sentiment words. We expect that statistically the importance of a sentiment word towards the keyword is related on the number of words between the sentiment and key word as suggested by Ding et al. \shortcite{Ding08}. Two other approaches is to automatically parse the material and either use the distance between key and sentiment word in the parse tree or develop grammatical dependence paths, see e.g. Jiang et al. \shortcite{Jiang11}. The aim of this paper is to compare the performance of a word distance method \cite{Ding08} with a developed method based on distance in parse tree and grammatical dependence paths to classify opinions in political discussions.
 
 The paper is organized as follows. 
 
 \section{Opinion mining methods}
 \label{sec:om}
 
-In this Section we present two methods to classify sentences to either positive, neutral or negative towards a keyword. Both methods follow the same general algorithm presented below which is inspired by  \citet{Ding08}. Both keywords, sentiment words and sentiment shifters can in general appear several times in a sentence. Sentiment shifters is words that potentially shift the sentiment of a sentence from positive to negative or negative to positive. E.g. ``not happy'' have the opposite polarity than just ``happy''. We assume that we have a list of sentiment words each associated with a sentiment score representing the polarity and strength of the sentiment word. Let $kw_i, i \in \{1,2,\ldots,I\}$ represent appearance number $i$ of the keyword in the sentence. Further let $sw_{jk}, j \in \{1,2,\ldots,J\}, k \in\{1,2,\ldots,K_j\}$ be appearance number $k$ of sentiment word $j$. Thus, sentiment word $j$ appears a total of $K_j$ times in the sentence. Finally let $ss_{lm}, l \in \{1,2,\ldots,L\}, m \in\{1,2,\ldots,M_l\}$ be appearance number $m$ of sentiment shifter $l$. We compute a sentimen scoret, $S$, for the sentence as follows
+In this Section we present two methods to classify sentences to either positive, neutral or negative towards a keyword. Both methods follow the same general algorithm presented below which is inspired by Ding et al. \shortcite{Ding08} and is based on a sentiment lexicon. Both keywords, sentiment words and sentiment shifters can in general appear several times in a sentence. Sentiment shifters is words that potentially shift the sentiment of a sentence from positive to negative or negative to positive. E.g. ``not happy'' have the opposite polarity than just ``happy''. We assume that we have a list of sentiment words each associated with a sentiment score representing the polarity and strength of the sentiment word. Let $kw_i, i \in \{1,2,\ldots,I\}$ represent appearance number $i$ of the keyword in the sentence. Further let $sw_{jk}, j \in \{1,2,\ldots,J\}, k \in\{1,2,\ldots,K_j\}$ be appearance number $k$ of sentiment word $j$. Thus, sentiment word $j$ appears a total of $K_j$ times in the sentence. Finally let $ss_{lm}, l \in \{1,2,\ldots,L\}, m \in\{1,2,\ldots,M_l\}$ be appearance number $m$ of sentiment shifter $l$. We 
+compute a sentiment score, $S$, for the sentence as follows
 \begin{equation}
   \label{eq:1}
-  S = \frac{1}{\ln{(IJK+1)}} \sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{K} \text{Imp}(kw_i, sw_{jk})\cdot f(sw_{jk}, \mathbf{ss})
+  S = \frac{1}{I}\sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{K}\mathbf{imp}(kw_i, sw_{jk})\mathbf{s}(sw_{jk}, \mathbf{ss})    
 \end{equation}
-where $\mathbf{ss}$ represents all the appearances of sentiment shifters in the sentence. The function Imp computes the importance of the sentiment word $sw_{jk}$ on the keyword appearance $kw_i$. This will be computed in different ways as described below. Further, the function $f$ computes whether the sentiment of $sw_{jk}$ should be shifted based on the sentiment shifters in the sentence. The function returns $-1$ (sentiment shift) if some of the sentiment shifters is within $d_{p}$ words in front or $d_{n}$ words behind $sw_{jk}$, respectively. Else $f$, returns $1$. We classify the opinion towards the keyword to be positive, neutral or negative if $S >= t_p$,  $t_p > S > t_n$ and  $S <= t_n$, respectively. The parameters $d_p, d_n, t_p$ and $t_n$ is tuned using a training set.
+where the function Imp computes the importance of the sentiment word $sw_{jk}$ on the keyword appearance $kw_i$. This will be computed in different ways as described below. Further, the function $\mathbf{s}$ computes whether the sentiment of $sw_{jk}$ should be shifted based on all the sentiment shifters in the sentence, denoted by $\mathbf{ss}$. The function $\mathbf{s}$ returns $-1$ (sentiment shift) if some of the sentiment shifters is within $d_{p}$ words in front or $d_{n}$ words behind $sw_{jk}$, respectively. Else $\mathbf{s}$, returns $1$. We classify the opinion towards the keyword to be positive, neutral or negative if $S >= t_p$,  $t_p > S > t_n$ and  $S <= t_n$, respectively. The parameters $d_p, d_n, t_p$ and $t_n$ is tuned using a training set.
 
 \subsection{Word distance method}
 \label{sec:wd}
 
+For the word distance method we use the following Imp function
+\begin{equation}
+  \label{eq:2}
+  \mathbf{imp}(kw_i, sw_{jk}) = \frac{\mathbf{sentsc}(sw_{jk})}{\mathbf{worddist}(kw_i, sw_{jk})}
+\end{equation}
+where $\mathbf{sentsc}(sw_{jk})$ is the sentiment score of $sw_{jk}$ from the sentiment lexicon and $\mathbf{worddist}(kw_i, sw_{jk})$ is the number of words between $kw_i$ and $sw_{jk}$ in the sentence plus one.
+
 \subsection{Parse tree method}
 \label{sec:dp}
 
-\subsection{Measuring the performance of opinion mining methods}
-\label{sec:diff}
+LEGGE INN FRA LILJA OG PER ERIK OM PARSING OG DEPENDENCE PATHS.
+
+Let $\mathcal{D}$ denote the set of all important grammatical relations. The function $\mathbf{gram}(kw_i, sw_{jk})$ returns the grammatical relation, and if $\mathbf{gram}(kw_i, sw_{jk}) \in \mathcal{D}$, then the function $W_{\mathbf{dep}}(kw_i, sw_{jk}) \in [0,1]$, return the importance of the grammatical relation. Further let $\mathbf{treedist}(kw_i, sw_{jk})$ return the number of words between the two words in the parse tree plus one. The Imp function is computed as follows. If $\mathbf{gram}(kw_i, sw_{jk}) \in \mathcal{D}$ we set 
+\begin{align}
+  \begin{split}
+  \mathbf{imp}&(kw_i, sw_{jk}) = \\
+  &\alpha \cdot \mathbf{sentsc}(sw_{jk}) W_{\mathbf{dep}}(kw_i, sw_{jk}) \\
+  +&(1 - \alpha) \cdot \dfrac{\mathbf{sentsc}(sw_{jk})}{\mathbf{treedist}(kw_i, sw_{jk})}    
+  \end{split}
+\end{align}
+where $\alpha \in [0,1]$ is parameter that weights the score from the important dependence path and the tree distance. If $\mathbf{gram}(kw_i, sw_{jk}) \not\in \mathcal{D}$ we simply set 
+\begin{align}
+  \begin{split}
+  \mathbf{imp}(kw_i, sw_{jk}) = \dfrac{\mathbf{sentsc}(sw_{jk})}{\mathbf{treedist}(kw_i, sw_{jk})}    
+  \end{split}
+\end{align}
 
 \section{Real data example}
 \label{sec:results}
+
+\subsection{Text material}
+
+We did not find any suitable annotated text material related to political discussions and therefore created our own. We manually selected 46 debate articles from the Norwegian online newspapers \textit{NRK Ytring, Dagbladet, Aftenposten, VG and Bergens Tidene}. To each debate article there were attached an discussion platform where readers could express their opinions and feelings towards the content of the debate article. All the text from the debate articles and the subsequent discussions were collected using text scraping \cite{Hammer13}. All the debate articles were related to religion and immigration and we wanted to classify the opinion towards the words with stem: \textit{islam, muslim, quran, allah, muhammed, imam and mosque}. This is typically topics that creates a lot of active discussions and disagreements.
+
+We automatically split the material into sentences and all sentences containing some of the keywords were selected for further analysis. If a sentence contained more than one keyword, e.g. both islam and muslim, the sentence were repeated one time for each key word. We could then measure the opinion towards each of the keywords in the sentence separately. 
+
+Each sentence were manually annotated whether the commenter were positive, negative or neutral towards the key word in the sentence. Each sentence were evaluated individually. The sentences were annotated based on all our knowledge, e.g. a sentence like ``Muhammed is like Hitler'' would be annotated as a negative opinion towards Muhammed. Further, if a commenter presented a negative fact about the keyword, the sentence would be denoted as negative.\\
+INTERANNOTARY!!\\
+Finally the material were divided in to two parts where the first half of the debate articles with subsequent discussions where in the training set and the rest were the test set. The individuals working on finding the important dependence paths, did only use the training set and did never see the test set before the decisions about dependence paths were decided.
+
+\subsection{Sentiment lexicon}
+
+
+
+% Resultater
+
 
 \section{Closing remarks}
 \label{sec:cr}
