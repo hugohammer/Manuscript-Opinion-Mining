@@ -1,0 +1,29 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{fixltx2e,amsmath}
+\usepackage{multirow}
+\usepackage{natbib}
+
+\def\bibfontsize{\small}
+\def\authorfmt#1{\textsc{#1}}
+\def\dcuand{\&}
+\let\citeN=\citeasnoun
+
+\MakeRobust{\eqref}
+
+\bibliographystyle{apa}
+
+\linespread{1.0}
+
+\begin{document}
+The parser used in this study is trained on the Norwegian Dependency Treebank (NDT). The NDT is a corpus built up at the National Library of Norway in the period 2011-2013, manually annotated with part-of-speech tags, morphological features, syntactic functions and dependency graphs \citep{Sol14, Sol13}. It consists of approximately 600 000 tokens, equally distributed between Norwegian Bokmål and Nynorsk, the two Norwegian written standards. Only the Bokmål subcorpus has been used here. A large proportion of the NDT is newspaper text, there are also parliament transcripts, government reports and texts with a more colloquial style from blogs.
+
+
+
+
+\bibliography{bibl}
+
+\end{document}
