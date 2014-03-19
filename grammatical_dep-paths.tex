@@ -1,0 +1,37 @@
+%
+% File acl2014.tex
+%
+% Contact: koller@ling.uni-potsdam.de, yusuke@nii.ac.jp
+%%
+%% Based on the style files for ACL-2013, which were, in turn,
+%% Based on the style files for ACL-2012, which were, in turn,
+%% based on the style files for ACL-2011, which were, in turn, 
+%% based on the style files for ACL-2010, which were, in turn, 
+%% based on the style files for ACL-IJCNLP-2009, which were, in turn,
+%% based on the style files for EACL-2009 and IJCNLP-2008...
+
+%% Based on the style files for EACL 2006 by 
+%%e.agirre@ehu.es or Sergi.Balari@uab.es
+%% and that of ACL 08 by Joakim Nivre and Noah Smith
+
+\documentclass[11pt]{article}
+\usepackage{acl2014}
+\usepackage{times}
+\usepackage{url}
+\usepackage{latexsym}
+
+%\setlength\titlebox{5cm}
+
+% You can expand the titlebox if you need extra space
+% to show all the authors. Please do not make the titlebox
+% smaller than 5cm (the original size); we will check this
+% in the camera-ready version and ask you to change it back.
+
+\begin{document}
+A second way of determining the importance of a sentiment word towards a keyword based on syntactically parsed texts, is to establish a list of grammatical dependency paths between words, and test whether such paths exist between the keywords and the sentiment words in the material under investigation \cite{Jiang11}. The assumption would be that, if there is a meaningful grammatical relation between a keyword and a sentiment word, it is likely that they are semantically related to each other. Furthermore, it is reasonable to expect than some paths are stronger indicators of the overall sentiment of the sentence than others. To test this method, we have made a list of 42 grammatical dependency patsh and given them a score between 1-3. The higher the score is, the better indicator of sentiment the path is assumed to be. In the following paragraphs, we will present our reasoning behind the choice of paths and the weight we have given them. Table <x> lists all phe paths. The paths are written as follows: postag-keyword:postag-sentiment word{\textunderscore}{\textunderscore}DEPREL{\textunderscore}up/dn({\textunderscore}{\textunderscore}DEPREL{\textunderscore}up/dn etc.). \emph{Up} and \emph{dn} show whether the preceding you move up or down in the dependency tree. So the relation between a noun keyword and a verb sentiment word where the noun is the subject of the verb, is represented as subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up. The relation between a keyword and a sentiment noun where the former is the subject and the latter is the direct object of the same verb, is subst:subst{\textunderscore}{\textunderscore}SUBST{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn. Below, we argue for our choices of grammatical dependency path and the score we have given them.
+
+
+
+\bibliography{bibl}
+
+\end{document}

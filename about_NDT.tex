@@ -1,25 +1,35 @@
-\documentclass[a4paper, 12pt]{article}
+%
+% File acl2014.tex
+%
+% Contact: koller@ling.uni-potsdam.de, yusuke@nii.ac.jp
+%%
+%% Based on the style files for ACL-2013, which were, in turn,
+%% Based on the style files for ACL-2012, which were, in turn,
+%% based on the style files for ACL-2011, which were, in turn, 
+%% based on the style files for ACL-2010, which were, in turn, 
+%% based on the style files for ACL-IJCNLP-2009, which were, in turn,
+%% based on the style files for EACL-2009 and IJCNLP-2008...
 
-\usepackage{natbib}
+%% Based on the style files for EACL 2006 by 
+%%e.agirre@ehu.es or Sergi.Balari@uab.es
+%% and that of ACL 08 by Joakim Nivre and Noah Smith
+
+\documentclass[11pt]{article}
+\usepackage{acl2014}
+\usepackage{times}
 \usepackage{url}
-\usepackage{graphicx}
-\usepackage{fixltx2e,amsmath}
-\usepackage{multirow}
-\usepackage{natbib}
+\usepackage{latexsym}
 
-\def\bibfontsize{\small}
-\def\authorfmt#1{\textsc{#1}}
-\def\dcuand{\&}
-\let\citeN=\citeasnoun
+%\setlength\titlebox{5cm}
 
-\MakeRobust{\eqref}
+% You can expand the titlebox if you need extra space
+% to show all the authors. Please do not make the titlebox
+% smaller than 5cm (the original size); we will check this
+% in the camera-ready version and ask you to change it back.
 
-\bibliographystyle{apa}
-
-\linespread{1.0}
 
 \begin{document}
-The parser used in this study is trained on the Norwegian Dependency Treebank (NDT). The NDT is a corpus built up at the National Library of Norway in the period 2011-2013, manually annotated with part-of-speech tags, morphological features, syntactic functions and dependency graphs \citep{Sol14, Sol13}. It consists of approximately 600 000 tokens, equally distributed between Norwegian Bokmål and Nynorsk, the two Norwegian written standards. Only the Bokmål subcorpus has been used here. A large proportion of the NDT is newspaper text, there are also parliament transcripts, government reports and texts with a more colloquial style from blogs.
+The parser used in this study is trained on the Norwegian Dependency Treebank (NDT). The NDT is a corpus built up at the National Library of Norway in the period 2011-2013, manually annotated with part-of-speech tags, morphological features, syntactic functions and dependency graphs \cite{Sol14, Sol13}. It consists of approximately 600 000 tokens, equally distributed between Norwegian Bokmål and Nynorsk, the two Norwegian written standards. Only the Bokmål subcorpus has been used here. A large proportion of the NDT is newspaper text, there are also parliament transcripts, government reports and texts with a more colloquial style from blogs. Detailed annotation guidelines in English will be available in April 2014 \cite{Kinn2013}.
 
 
 
