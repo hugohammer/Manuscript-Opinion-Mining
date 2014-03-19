@@ -1,0 +1,86 @@
+%
+% File acl2014.tex
+%
+% Contact: koller@ling.uni-potsdam.de, yusuke@nii.ac.jp
+%%
+%% Based on the style files for ACL-2013, which were, in turn,
+%% Based on the style files for ACL-2012, which were, in turn,
+%% based on the style files for ACL-2011, which were, in turn, 
+%% based on the style files for ACL-2010, which were, in turn, 
+%% based on the style files for ACL-IJCNLP-2009, which were, in turn,
+%% based on the style files for EACL-2009 and IJCNLP-2008...
+
+%% Based on the style files for EACL 2006 by 
+%%e.agirre@ehu.es or Sergi.Balari@uab.es
+%% and that of ACL 08 by Joakim Nivre and Noah Smith
+
+\documentclass[11pt]{article}
+\usepackage{acl2014}
+\usepackage{times}
+\usepackage{url}
+\usepackage{latexsym}
+\usepackage{covington}
+
+%\setlength\titlebox{5cm}
+
+% You can expand the titlebox if you need extra space
+% to show all the authors. Please do not make the titlebox
+% smaller than 5cm (the original size); we will check this
+% in the camera-ready version and ask you to change it back.
+
+\begin{document}
+
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline \bf{Path} & \bf{Path group} & \bf{Score} \\ \hline
+subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up & 3 & subj-pred \\
+subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}INFV{\textunderscore}dn & 3 & subj-pred \\
+subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}INFV{\textunderscore}dn{\textunderscore}{\textunderscore}INFV{\textunderscore}dn & 3 & subj-pred \\
+subst:verb{\textunderscore}{\textunderscore}KOORD{\textunderscore}up{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up & 3 & subj-pred \\
+subst:verb{\textunderscore}{\textunderscore}KOORD{\textunderscore}up{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}INFV{\textunderscore}dn & 3 & subj-pred \\
+subst:adj{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn & 3 & subj-pred \\
+subst:adj{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}INFV{\textunderscore}dn{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn & 3 & subj-pred \\
+subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn & 3 & subj-pred \\
+subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}INFV{\textunderscore}dn{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn & 3 & subj-pred \\
+subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn & 3 & subj-within pred \\
+subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}INFV{\textunderscore}dn{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn & 3 & subj-within pred \\
+subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn{\textunderscore}{\textunderscore}KOORD{\textunderscore}dn & 3 & subj-within pred \\
+subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn{\textunderscore}{\textunderscore}DET{\textunderscore}dn & 3 & subj-within pred \\
+subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn{\textunderscore}{\textunderscore}DET{\textunderscore}dn & 3 & subj-within pred \\
+subst:adj{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn{\textunderscore}{\textunderscore}ATR{\textunderscore}dn & 3 & subj-within pred \\
+subst:adj{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn{\textunderscore}{\textunderscore}ATR{\textunderscore}dn & 3 & subj-within pred \\
+subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}ADV{\textunderscore}dn{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}dn & 2 & subj-within pred \\
+subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}INFV{\textunderscore}dn{\textunderscore}{\textunderscore}ADV{\textunderscore}dn{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}dn & 2 & subj-within pred \\
+subst:adj{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}ADV{\textunderscore}dn & 2 & subj-within pred \\
+subst:adj{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}INFV{\textunderscore}dn{\textunderscore}{\textunderscore}ADV{\textunderscore}dn & 2 & subj-within pred \\
+subst:verb{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}up{\textunderscore}{\textunderscore}ATR{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}up & 1 & subj-within pred \\
+subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}KOORD{\textunderscore}dn & 1 & subj-within pred \\
+subst:verb{\textunderscore}{\textunderscore}DOBJ{\textunderscore}up & 1 & pred-internal \\
+subst:verb{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}up{\textunderscore}{\textunderscore}ADV{\textunderscore}up & 1 & pred-internal \\
+subst:subst{\textunderscore}{\textunderscore}DOBJ{\textunderscore}up{\textunderscore}{\textunderscore}ADV{\textunderscore}dn{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}dn & 1 & pred-internal \\
+subst:adj{\textunderscore}{\textunderscore}DOBJ{\textunderscore}up{\textunderscore}{\textunderscore}ADV{\textunderscore}dn & 1 & pred-internal \\
+subst:adj{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}up{\textunderscore}{\textunderscore}ADV{\textunderscore}up & 1 & pred-internal \\
+subst:verb{\textunderscore}{\textunderscore}DET{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}up & 1 & pred-internal \\
+subst:adj{\textunderscore}{\textunderscore}ATR{\textunderscore}dn & 2 & NP-internal \\
+subst:subst{\textunderscore}{\textunderscore}ATR{\textunderscore}dn{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}dn & 2 & NP-internal \\
+subst:subst{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}up{\textunderscore}{\textunderscore}ATR{\textunderscore}up & 2 & NP-internal \\
+subst:adj{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}up{\textunderscore}{\textunderscore}ATR{\textunderscore}up & 2 & NP-internal \\
+subst:verb{\textunderscore}{\textunderscore}ATR{\textunderscore}dn & 2 & NP-internal \\
+subst:subst{\textunderscore}{\textunderscore}KOORD{\textunderscore}dn & 2 & NP-internal \\
+subst:subst{\textunderscore}{\textunderscore}KOORD{\textunderscore}up & 2 & NP-internal \\
+subst:subst{\textunderscore}{\textunderscore}DET{\textunderscore}dn & 2 & NP-internal \\
+subst:subst{\textunderscore}{\textunderscore}DET{\textunderscore}up & 2 & NP-internal \\
+subst:adj{\textunderscore}{\textunderscore}ATR{\textunderscore}dn{\textunderscore}{\textunderscore}ADV{\textunderscore}dn & 1 & NP-internal \\
+subst:verb{\textunderscore}{\textunderscore}ATR{\textunderscore}dn{\textunderscore}{\textunderscore}KOORD{\textunderscore}dn & 1 & NP-internal \\
+subst:adj{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}up{\textunderscore}{\textunderscore}ATR{\textunderscore}up{\textunderscore}{\textunderscore}ATR{\textunderscore}dn & 1 & NP-internal \\
+subst:adj{\textunderscore}{\textunderscore}ATR{\textunderscore}dn{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}dn{\textunderscore}{\textunderscore}ATR{\textunderscore}dn & 1 & NP-internal \\
+subst:subst{\textunderscore}{\textunderscore}KOORD{\textunderscore}up{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}up{\textunderscore}{\textunderscore}ATR{\textunderscore}up & 3 & NP-internal \\
+\hline
+\end{tabular}
+\end{center}
+\caption{\label{grampath} Grammatical dependency paths }
+\end{table}
+
+\end{document}
