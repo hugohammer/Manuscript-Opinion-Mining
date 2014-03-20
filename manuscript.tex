@@ -86,9 +86,10 @@ where $\mathbf{sentsc}(sw_{j})$ is the sentiment score of $sw_{j}$ from the sent
 \subsection{Parse tree method}
 \label{sec:dp}
 %LILJA: OM PARSING
-When determining the sentiment expressed towards a specific target word, the syntactic environment of this word and how it relates to sentiment-bearing words in the context may clearly be of importance.
+When determining the sentiment expressed towards a specific target word, the syntactic environment of this word and how it relates to sentiment-bearing words in the context may clearly be of importance. 
 
-The parser used in this study is trained on the Norwegian Dependency Treebank (NDT). The NDT is a corpus built up at the National Library of Norway in the period 2011-2013, manually annotated with part-of-speech tags, morphological features, syntactic functions and dependency graphs \cite{Sol14, Sol13}. It consists of approximately 600 000 tokens, equally distributed between Norwegian Bokmål and Nynorsk, the two Norwegian written standards. Only the Bokmål subcorpus has been used here. A large proportion of the NDT is newspaper text, there are also parliament transcripts, government reports and texts with a more colloquial style from blogs. Detailed annotation guidelines in English will be made available in April 2014 \cite{Kinn2013}.
+\paragraph{Dependency distance}
+One way of expressing the syntactic environment of a target word with respect to a sentiment word is to determine its distance in the dependency graph. We define a distance function $\mathbf{depdist}(kw_i, sw_{j})$ which returns the number of nodes between the two words in the parse tree plus one.
 
 LILJA:OM DEPENDENCY DISTANCE?
 
@@ -215,6 +216,28 @@ Finally the material were divided in to two parts where the first half of the de
   \end{tabular}
   \label{tab:1}
 \end{table}
+
+\subsection{Corpus postprocessing}
+The sentiment corpus was PoS-tagged and parsed using the
+Bohnet\&Nivre-parser \cite{Boh:Niv:12}. This parser is a
+transition-based dependency parser with joint tagger that implements
+global learning and a beam search for non-projective labeled
+dependency parsing.  This latter parser has recently outperformed
+pipeline systems (such as the Malt and MST parsers) both in terms of
+tagging and parsing accuracy for typologically diverse languages such
+as Chinese, English, and German. It has been reported to obtain a
+labeled accuracy of 87.7 for Norwegian \cite{Sol14}.  The parser is
+trained on the Norwegian Dependency Treebank (NDT). The NDT is a
+treebank created at the National Library of Norway in the period
+2011-2013, manually annotated with part-of-speech tags, morphological
+features, syntactic functions and dependency graphs \cite{Sol14,
+  Sol13}. It consists of approximately 600 000 tokens, equally
+distributed between Norwegian Bokm{\aa}l and Nynorsk, the two Norwegian
+written standards. Only the Bokm{\aa}l subcorpus has been used here. A
+large proportion of the NDT is newspaper text, there are also
+parliament transcripts, government reports and texts with a more
+colloquial style from blogs. Detailed annotation guidelines in English
+will be made available in April 2014 \cite{Kinn2013}.
 
 \subsection{Sentiment lexicon and sentiment shifters}
 
