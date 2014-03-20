@@ -71,6 +71,12 @@ Long Jiang, Mo~Yu, Ming Zhou, Xiaohua Liu, and Tiejun Zhao.
   {T}echnologies - {V}olume 1}, HLT '11, pages 151--160, Stroudsburg, PA, USA.
   Association for Computational Linguistics.
 
+\bibitem[\protect\citename{Kinn \bgroup et al.\egroup }2014]{Kinn2013}
+Kari Kinn, Pål~Kristian Eriksen, and Per~Erik Solberg.
+\newblock 2014.
+\newblock {NDT} {G}uidelines for {M}orphological and {S}yntactic {A}nnotation.
+\newblock Technical report, National Library of Norway.
+
 \bibitem[\protect\citename{Liu}2012]{Bing12}
 Bing Liu.
 \newblock 2012.
@@ -90,6 +96,14 @@ Finn~{\AA}rup Nielsen.
 \newblock {\em {R}: {A} {L}anguage and {E}nvironment for {S}tatistical
   {C}omputing}.
 \newblock R Foundation for Statistical Computing, Vienna, Austria.
+
+\bibitem[\protect\citename{Solberg \bgroup et al.\egroup }2014]{Sol14}
+Per~Erik Solberg, Arne Skj{\ae}rholt, Lilja {\O}vrelid, Kristin Hagen, and
+  Janne~Bondi Johannessen.
+\newblock 2014.
+\newblock {T}he {N}orwegian {D}ependency {T}reebank.
+\newblock In {\em {P}roceedings of {LREC} 2014}.
+\newblock Accepted.
 
 \bibitem[\protect\citename{Str{\o}mmen}2012]{Strommen12}
 {\O}yvind Str{\o}mmen.
