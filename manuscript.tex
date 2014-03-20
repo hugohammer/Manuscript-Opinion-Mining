@@ -40,8 +40,26 @@ Social media and online discussions contain a wealth of information which can ma
 
 Opinion classification is perhaps the most studied topic within opinion mining. It aims to classify a set of text as either positive or negative and sometimes also neutral. There are mainly two approaches, one based on machine learning and one based on based on using a list of words with given sentiment scores (lexical approach). One simple lexical approach is to count the number of words with positive and negative sentiment in the document as suggested by Hu and Liu \shortcite{Hu04}. One may classify the opinion of larger documents like movie or product reviews or smaller documents like tweets, comments or sentences. See Liu \shortcite{Bing12}, chapters three to five and references therein for the description of several opinion classification methods. 
 
-In this paper we focus on classifying the opinion toward religious/political topics, say the Quran, in political discussion by using the lexical-based approach. 
-One intuitive approach is to find both the keyword (e.g. Quran) and the words with sentiment in the sentence and classify the sentiment of the sentence based on the polarity of these sentiment words. We expect that statistically the importance of a sentiment word towards the keyword is related to the number of words between the sentiment and key word as suggested by Ding et al. \shortcite{Ding08}. Two other approaches is to automatically parse the material and either use the distance between key and sentiment word in the parse tree or develop grammatical dependence paths, see e.g. Jiang et al. \shortcite{Jiang11}. The aim of this paper is to compare the performance of a word distance method \cite{Ding08} with novel methods based on distance in parse tree and grammatical dependence paths to classify opinions in political discussions.
+In this paper we focus on classifying the sentiment towards
+religious/political topics, say the Quran, in Norwegian political
+discussion. We use a lexicon-based approach where we classify the
+sentiment of a sentence based on the polarity of sentiment words in
+relation to a set of target words. We expect that statistically the
+importance of a sentiment word towards the keyword is related to the
+number of words between the sentiment and key word as suggested by
+Ding et al. \shortcite{Ding08}.  Information about the syntactic
+environment of certain words or phrases has in previous work also been
+shown to be useful for the task of sentiment classification
+\cite{Wil:Wie:Hof:09,Jiang11}. In this work we therefore compare the
+results obtained using a token-based distance measure with a novel
+syntax-based distance measure obtained using dependency graphs and
+further augmented with linguistically motivated syntactic patterns
+expressed as dependency paths.  We furthermore present a freely
+available corpus of Norwegian political discussion related to religion
+and immigration, which has been manually annotated for the sentiment
+expressed towards a set of target words, as well as a manually translated sentiment lexicon.
+
+%% In this paper we focus on classifying the opinion toward religious/political topics, say the Quran, in political discussion by using the lexical-based approach. One intuitive approach is to find both the keyword (e.g. Quran) and the words with sentiment in the sentence and classify the sentiment of the sentence based on the polarity of these sentiment words. We expect that statistically the importance of a sentiment word towards the keyword is related to the number of words between the sentiment and key word as suggested by Ding et al. \shortcite{Ding08}. Two other approaches is to automatically parse the material and either use the distance between key and sentiment word in the parse tree or develop grammatical dependence paths, see e.g. Jiang et al. \shortcite{Jiang11}. The aim of this paper is to compare the performance of a word distance method \cite{Ding08} with novel methods based on distance in parse tree and grammatical dependence paths to classify opinions in political discussions.
 
 The paper is organized as follows. 
 
@@ -67,7 +85,8 @@ where $\mathbf{sentsc}(sw_{j})$ is the sentiment score of $sw_{j}$ from the sent
 
 \subsection{Parse tree method}
 \label{sec:dp}
-LILJA: OM PARSING
+%LILJA: OM PARSING
+When determining the sentiment expressed towards a specific target word, the syntactic environment of this word and how it relates to sentiment-bearing words in the context may clearly be of importance.
 
 The parser used in this study is trained on the Norwegian Dependency Treebank (NDT). The NDT is a corpus built up at the National Library of Norway in the period 2011-2013, manually annotated with part-of-speech tags, morphological features, syntactic functions and dependency graphs \cite{Sol14, Sol13}. It consists of approximately 600 000 tokens, equally distributed between Norwegian Bokmål and Nynorsk, the two Norwegian written standards. Only the Bokmål subcorpus has been used here. A large proportion of the NDT is newspaper text, there are also parliament transcripts, government reports and texts with a more colloquial style from blogs. Detailed annotation guidelines in English will be made available in April 2014 \cite{Kinn2013}.
 
