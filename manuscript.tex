@@ -16,15 +16,30 @@
 
 \linespread{1.0}
 
+\title{Sentiment classification in online political discussion -- comparison of two methods}
+
+\author{First Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} \\\And
+  Second Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} \\}
+
+\date{}
+
 \begin{document}
 
-\begin{center}
-  \textbf{\Large{Classifying opinions in online political discussion -- comparison of two methods}}
+%% \begin{center}
+%%   \textbf{\Large{Classifying opinions in online political discussion -- comparison of two methods}}
 
-\vspace{5mm}
+%% \vspace{5mm}
 
-\end{center}
-
+%% \end{center}
+\maketitle
 \begin{abstract}
 Bla bla
 \end{abstract}
@@ -36,9 +51,9 @@ keywords: \textit{}
 
 Over the past years there has been an alarming growth in hate against minorities like Muslims, Jews, Gypsies and gays in Europe, driven by right wing populism parties and extremist organizations \cite{r4,r11}. A similar increase in hate speech has been observed on the Internet \cite{r6,s2}, and experts are concerned that individuals influenced by this web content may resort to violence as a result \cite{Strommen12,Sunde13}. Hateful speech is not only observed on extremist sites, but also as comments on e.g. Twitter, YouTube and online newspaper articles.  
 
-Social media and online discussions contain a wealth of information which can make us able to understand the extent of hate speech on the Internet. However, it turns out that academia is lacking research on social media and online radicalization \cite{s1}. Opinion mining is the discipline of automatically extracting opinions from a text material and may be one important tool in the understanding of online radicalization. Opinion mining has mostly been used to analyze opinions in comments and reviews about commercial products, but there are also examples of opinion mining towards political tweets and discussions, see e.g. Tumasjan et al. \shortcite{Tumasjan2010}; Chen et al. \shortcite{Chen10}. Opinion mining towards political discussions is known to be hard since citations, irony and sarcasm is very common \cite{Bing12}.
+Social media and online discussions contain a wealth of information which can make us able to understand the extent of hate speech on the Internet. However, it turns out that academia is lacking research on social media and online radicalization \cite{s1}. Sentiment analysis (SA) is the discipline of automatically determining sentiment in text material and may be one important tool in the understanding of online radicalization. SA has mostly been used to analyze opinions in comments and reviews about commercial products, but there are also examples of SA towards political tweets and discussions, see e.g. Tumasjan et al. \shortcite{Tumasjan2010}; Chen et al. \shortcite{Chen10}. SA of political discussions is known to be a difficult task since citations, irony and sarcasm is very common \cite{Bing12}.
 
-Opinion classification is perhaps the most studied topic within opinion mining. It aims to classify a set of text as either positive or negative and sometimes also neutral. There are mainly two approaches, one based on machine learning and one based on based on using a list of words with given sentiment scores (lexicon-based approach). One simple lexicon-based approach is to count the number of words with positive and negative sentiment in the document as suggested by Hu and Liu \shortcite{Hu04}. One may classify the opinion of larger documents like movie or product reviews or smaller documents like tweets, comments or sentences. %% See Liu \shortcite{Bing12}, chapters three to five and references therein for the description of several opinion classification methods. 
+Sentiment classification aims to classify a document or sentence as either positive or negative and sometimes also neutral. There are mainly two approaches, one based on machine learning and one based on based on using a list of words with given sentiment scores (lexicon-based approach). One simple lexicon-based approach is to count the number of words with positive and negative sentiment in the document as suggested by Hu and Liu \shortcite{Hu04}. One may classify the opinion of larger documents like movie or product reviews or smaller documents like tweets, comments or sentences. %% See Liu \shortcite{Bing12}, chapters three to five and references therein for the description of several opinion classification methods. 
 
 In this paper we focus on classifying the sentiment towards
 religious/political topics, say the Quran, in Norwegian political
@@ -63,7 +78,7 @@ expressed towards a set of target words, as well as a manually translated sentim
 
 The paper is organized as follows. 
 
-\section{Opinion mining methods}
+\section{Proposed SA methods}
 \label{sec:om}
 
 In this Section we present two methods to classify sentences as either positive, neutral or negative towards a keyword. Both methods follow the same general algorithm presented below which is inspired by Ding et al. \shortcite{Ding08} and is based on a list of sentiment words each associated with a sentiment score representing the polarity and strength of the sentiment word (sentiment lexicon). Both keywords, sentiment words and sentiment shifters can in general appear several times in a sentence. Sentiment shifters are words that potentially shift the sentiment of a sentence from positive to negative or negative to positive. E.g. ``not happy'' have the opposite polarity than just ``happy''. Let $kw_i, i \in \{1,2,\ldots,I\}$ represent appearance number $i$ of the keyword in the sentence. Further let $sw_{j}, j \in \{1,2,\ldots,J\}$ be appearance number $j$ of a sentiment word in the sentence. Finally let $\textbf{ss} = (ss_1, ss_2, \ldots, ss_K)$ repressent the sentiment shifters in the sentence. We compute a sentiment score, $S$, for the sentence as follows
@@ -71,7 +86,7 @@ In this Section we present two methods to classify sentences as either positive,
   \label{eq:1}
   S = \frac{1}{I}\sum_{i=1}^{I} \sum_{j=1}^{J} \mathbf{imp}(kw_i, sw_{j})\mathbf{shift}(sw_{j}, \mathbf{ss})    
 \end{equation}
-where the function \textbf{imp} computes the importance of the sentiment word $sw_{j}$ on the keyword appearance $kw_i$. This will be computed in different ways as described below. Further, the function $\mathbf{shift}(sw_{j}, \mathbf{ss})$ computes whether the sentiment of $sw_{j}$ should be shifted based on all the sentiment shifters in the sentence. It returns $-1$ (sentiment shift) if some of the sentiment shifters is within $d_{p}$ words in front or $d_{n}$ words behind $sw_{j}$, respectively. Else the function, returns $1$ (no sentiment shift). We classify the opinion towards the keyword to be positive, neutral or negative if $S >= t_p$,  $t_p > S > t_n$ and  $S <= t_n$, respectively. The parameters $d_p, d_n, t_p$ and $t_n$ is tuned using a training set.
+where the function \textbf{imp} computes the importance of the sentiment word $sw_{j}$ on the keyword appearance $kw_i$. This will be computed in different ways as described below. Further, the function $\mathbf{shift}(sw_{j}, \mathbf{ss})$ computes whether the sentiment of $sw_{j}$ should be shifted based on all the sentiment shifters in the sentence. It returns $-1$ (sentiment shift) if some of the sentiment shifters is within $d_{p}$ words in front or $d_{n}$ words behind $sw_{j}$, respectively. Else the function, returns $1$ (no sentiment shift). We classify the sentiment towards the keyword to be positive, neutral or negative if $S >= t_p$,  $t_p > S > t_n$ and  $S <= t_n$, respectively. The parameters $d_p, d_n, t_p$ and $t_n$ is tuned using a training set.
 
 \subsection{Word distance method}
 \label{sec:wd}
@@ -113,7 +128,7 @@ yes now exult probably muslims+the
 
 \end{examples}
 
-We have chosen to give subject-predicate paths the highest possible score, 3. Firstly, the combination of a subject and a predicate will result in a proposition, a statement which is evaluated as true or false \cite{Heim98}. We expect that a proposition typically will represent the opinion of the speaker, although e.g. irony and certain kinds of embedding can shift the truth evaluation in some cases \cite{Hooper73}. Secondly, if the predicate represents an event brought about by an intentional agent, such as \emph{jubler}, 'exult', in (\ref{verbpred}), the subject will typically represent that agent. If the predicate has a positive or negative sentiment, we expect that this sentiment is directed towards this intentional agent. 
+We have chosen to give subject-predicate paths the highest possible score, 3. Firstly, the combination of a subject and a predicate will result in a proposition, a statement which is evaluated as true or false \cite{Heim98}. We expect that a proposition typically will represent the sentiment of the speaker, although e.g. irony and certain kinds of embedding can shift the truth evaluation in some cases \cite{Hooper73}. Secondly, if the predicate represents an event brought about by an intentional agent, such as \emph{jubler}, 'exult', in (\ref{verbpred}), the subject will typically represent that agent. If the predicate has a positive or negative sentiment, we expect that this sentiment is directed towards this intentional agent. 
 
 A second group we have considered, contains paths from subject targets to sentiment words embedded within the predicate. Examples of such paths are those from the subject to the nominal direct object of a verb, as in (\ref{subjobj}), subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn. Paths from subjects into different kinds of adverbials are also a part of this group.
 
@@ -180,7 +195,7 @@ Note that when $\alpha = 0$, \eqref{eq:3} reduces to \eqref{eq:4}.
 \subsection{Statistical analysis of classification performance}
 \label{sec:sa}
 
-We compare the classification performance of a set of $M$ different methods, denoted as $\Pi_1, \Pi_2, \ldots, \Pi_M$, using random effect logistic regression. Let the stochastic variable $Y_{tm} \in \{0,1\}$ represents whether method $\Pi_m, \, m \in \{1,2,\ldots,M\}$ classified the correct opinion to sentence number $t \in \{1,2,\ldots,T\}$, where $T$ is the number of sentences in the test set. We let $Y_{tm}$ be the dependent variable of the regression model. The different methods $\Pi_1, \Pi_2, \ldots, \Pi_M$ is included as a categorical independent variable in the regression model. We also assume that classification performance of the different methods depends on the sentence to be classified, thus the sentence number is included as a random effect. The regression model is formulated as
+We compare the classification performance of a set of $M$ different methods, denoted as $\Pi_1, \Pi_2, \ldots, \Pi_M$, using random effect logistic regression. Let the stochastic variable $Y_{tm} \in \{0,1\}$ represents whether method $\Pi_m, \, m \in \{1,2,\ldots,M\}$ classified the correct sentiment to sentence number $t \in \{1,2,\ldots,T\}$, where $T$ is the number of sentences in the test set. We let $Y_{tm}$ be the dependent variable of the regression model. The different methods $\Pi_1, \Pi_2, \ldots, \Pi_M$ is included as a categorical independent variable in the regression model. We also assume that classification performance of the different methods depends on the sentence to be classified, thus the sentence number is included as a random effect. The regression model is formulated as
 \begin{align}
   \label{eq:5}
   \begin{split}
@@ -198,15 +213,15 @@ The statistical analysis is performed using the statistical program R \cite{R} a
 
 \subsection{Text material}
 
-We did not find any suitable annotated text material related to political discussions and therefore created our own. We manually selected 46 debate articles from the Norwegian online newspapers \textit{NRK Ytring, Dagbladet, Aftenposten, VG and Bergens Tidene}. To each debate article there were attached a discussion thread where readers could express their opinions and feelings towards the content of the debate article. All the text from the debate articles and the subsequent discussions were collected using text scraping \cite{Hammer13}. The debate articles were related to religion and immigration and we wanted to classify the opinion towards all words with stem: \textit{islam, muslim, quran, allah, muhammed, imam and mosque}. These are topics that typically create a lot of active discussions and disagreements.
+We did not find any suitable annotated text material related to political discussions and therefore created our own. We manually selected 46 debate articles from the Norwegian online newspapers \textit{NRK Ytring, Dagbladet, Aftenposten, VG and Bergens Tidene}. To each debate article there were attached a discussion thread where readers could express their opinions and feelings towards the content of the debate article. All the text from the debate articles and the subsequent discussions were collected using text scraping \cite{Hammer13}. The debate articles were related to religion and immigration and we wanted to classify the sentiment towards all words with stem: \textit{islam, muslim, quran, allah, muhammed, imam and mosque}. These are topics that typically create a lot of active discussions and disagreements.
 
-We automatically divided the material into sentences and all sentences containing at least one keyword and one sentiment word were kept for further analysis. If a sentence contained more than one keyword, e.g. both Islam and Quran, the sentence were repeated one time for each keyword in the final text material. We could then classify the opinion towards each of the keywords in the sentence consecutively. To assure that we do not underestimate the uncertainty in the statistical analysis, we see each repetition of the sentence as the same sentence with respect to the sentence random effect in the regression model in Section \ref{sec:sa}
+We automatically divided the material into sentences and all sentences containing at least one keyword and one sentiment word were kept for further analysis. If a sentence contained more than one keyword, e.g. both Islam and Quran, the sentence were repeated one time for each keyword in the final text material. We could then classify the sentiment towards each of the keywords in the sentence consecutively. To assure that we do not underestimate the uncertainty in the statistical analysis, we see each repetition of the sentence as the same sentence with respect to the sentence random effect in the regression model in Section \ref{sec:sa}
 
-Each sentence was manually annotated as to whether the commenter was positive, negative or neutral towards the keyword in the sentence. Each sentence was evaluated individually. The sentences were annotated based on real-world knowledge, e.g. a sentence like ``Muhammed is like Hitler'' would be annotated as a negative opinion towards Muhammed. Further, if a commenter presented a negative fact about the keyword, the sentence would be denoted as negative.
+Each sentence was manually annotated as to whether the commenter was positive, negative or neutral towards the keyword in the sentence. Each sentence was evaluated individually. The sentences were annotated based on real-world knowledge, e.g. a sentence like ``Muhammed is like Hitler'' would be annotated as a negative sentiment towards Muhammed. Further, if a commenter presented a negative fact about the keyword, the sentence would be denoted as negative.
 
 In order to assess inter-annotator agreement, a random sample of 65 sentences from the original text material was annotated by a second annotator. These sentences were not included in either the training or test set. For these sentences, the two annotators agreed on 58, which is an 89\% agreement, with a 95\% confidence interval equal to (79\%, 95\%) assuming that each sentence is independent. Since the sentences are drawn randomly from the population of all sentences this is a fair assumption.
 
-Finally the material was divided into two parts where the first half of the debate articles with subsequent discussions make up the training set and the rest constitutes a held-out test set. In the development of the important dependency paths, only the training set was used. After the division, the training and test set consisted of a total of 382 and 308 sentences, respectively. Table \ref{tab:1} summarizes the opinions in the sentences
+Finally the material was divided into two parts where the first half of the debate articles with subsequent discussions make up the training set and the rest constitutes a held-out test set. In the development of the important dependency paths, only the training set was used. After the division, the training and test set consisted of a total of 382 and 308 sentences, respectively. Table \ref{tab:1} summarizes the sentiments in the sentences.
 \begin{table}
   \caption{Manual annotation of training and test set.}
   \centering
@@ -244,7 +259,7 @@ will be made available in April 2014 \cite{Kinn2013}.
 
 Unfortunately, no sentiment lexicon existed for the Norwegian language and therefore we developed our own by manually translating the AFINN list \cite{Nielsen11}. We also manually added 1590 words relevant to political discussions  like 'deport', 'expel', 'extremist' and 'terrorist', ending up with a list of 4067 Norwegian sentiment words. Each word were given a score from $-5$ to $5$ ranging from words with extremely negative sentiment (e.g. 'behead') to highly positive sentiment words (e.g. 'breathtaking').
 
-Several Norwegian sentiment shifters were considered but only the basic shifter 'not' improved the opinion classification and therefore only this word were used in the method.
+Several Norwegian sentiment shifters were considered but only the basic shifter 'not' improved the sentiment classification and therefore only this word were used in the method.
 
 \subsection{Classification performance}
 
@@ -275,9 +290,9 @@ We see that the sentiment shifter 'not' only have a positive effect on the class
 \section{Closing remarks}
 \label{sec:cr}
 
-Classifying opinions in political discussions is hard because of the frequent use of irony, sarcasm and citations. In this paper we have compared the use of word distance between keyword and sentiment word against metrics related to parsed sentence information. Our results show that using dependency tree distances or important dependency paths, improves the classification performance compared to using word distance. 
+Classifying sentiment in political discussions is hard because of the frequent use of irony, sarcasm and citations. In this paper we have compared the use of word distance between keyword and sentiment word against metrics related to parsed sentence information. Our results show that using dependency tree distances or important dependency paths, improves the classification performance compared to using word distance. 
 
-Manually selecting important dependency paths for the aim of opinion mining is a hard task. A natural further step of our analysis is to expand the training and test material and use machine learning to see if there exists dependency paths that improve results compared to using dependency distance.
+Manually selecting important dependency paths for the aim of sentiment analysis is a hard task. A natural further step of our analysis is to expand the training and test material and use machine learning to see if there exists dependency paths that improve results compared to using dependency distance.
 
 \bibliography{bibl}
 
