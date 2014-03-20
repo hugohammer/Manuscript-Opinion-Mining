@@ -16,7 +16,7 @@
 
 \linespread{1.0}
 
-\title{Sentiment classification in online political discussion -- comparison of two methods}
+\title{Sentiment classification of online political discussion -- a comparison of two methods}
 
 \author{First Author \\
   Affiliation / Address line 1 \\
@@ -208,10 +208,10 @@ where $\epsilon_t$ is the sentence number random effect and $\epsilon_{tm}$ is a
 The statistical analysis is performed using the statistical program R \cite{R} and the R package \verb|lme4| \cite{lme4}.
 
 
-\section{Real data example}
+\section{Linguistic resources}
 \label{sec:results}
 
-\subsection{Text material}
+\subsection{Sentiment corpus}
 
 We did not find any suitable annotated text material related to political discussions and therefore created our own. We manually selected 46 debate articles from the Norwegian online newspapers \textit{NRK Ytring, Dagbladet, Aftenposten, VG and Bergens Tidene}. To each debate article there were attached a discussion thread where readers could express their opinions and feelings towards the content of the debate article. All the text from the debate articles and the subsequent discussions were collected using text scraping \cite{Hammer13}. The debate articles were related to religion and immigration and we wanted to classify the sentiment towards all words with stem: \textit{islam, muslim, quran, allah, muhammed, imam and mosque}. These are topics that typically create a lot of active discussions and disagreements.
 
@@ -223,7 +223,6 @@ In order to assess inter-annotator agreement, a random sample of 65 sentences fr
 
 Finally the material was divided into two parts where the first half of the debate articles with subsequent discussions make up the training set and the rest constitutes a held-out test set. In the development of the important dependency paths, only the training set was used. After the division, the training and test set consisted of a total of 382 and 308 sentences, respectively. Table \ref{tab:1} summarizes the sentiments in the sentences.
 \begin{table}
-  \caption{Manual annotation of training and test set.}
   \centering
   \begin{tabular}{lcccc}
              & Negative & Neutral & Positive \\\hline
@@ -231,6 +230,7 @@ Finally the material was divided into two parts where the first half of the deba
     Test     & 102 (33\%)& 182 (59\%) & 24 (8\%)
   \end{tabular}
   \label{tab:1}
+  \caption{Manual annotation of training and test set.}
 \end{table}
 
 \subsection{Corpus postprocessing}
@@ -247,7 +247,7 @@ trained on the Norwegian Dependency Treebank (NDT). The NDT is a
 treebank created at the National Library of Norway in the period
 2011-2013, manually annotated with part-of-speech tags, morphological
 features, syntactic functions and dependency graphs \cite{Sol14,
-  Sol13}. It consists of approximately 600 000 tokens, equally
+ Sol13}. It consists of approximately 600 000 tokens, equally
 distributed between Norwegian Bokm{\aa}l and Nynorsk, the two Norwegian
 written standards. Only the Bokm{\aa}l subcorpus has been used here. A
 large proportion of the NDT is newspaper text, there are also
@@ -261,7 +261,7 @@ Unfortunately, no sentiment lexicon existed for the Norwegian language and there
 
 Several Norwegian sentiment shifters were considered but only the basic shifter 'not' improved the sentiment classification and therefore only this word were used in the method.
 
-\subsection{Classification performance}
+\section{Experiments}
 
 In this study we compared four different methods based on the general algorithm in \eqref{eq:1}.
 \begin{itemize}
