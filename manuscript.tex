@@ -86,13 +86,14 @@ where $\mathbf{sentsc}(sw_{j})$ is the sentiment score of $sw_{j}$ from the sent
 \subsection{Parse tree method}
 \label{sec:dp}
 %LILJA: OM PARSING
-When determining the sentiment expressed towards a specific target word, the syntactic environment of this word and how it relates to sentiment-bearing words in the context may clearly be of importance. 
+When determining the sentiment expressed towards a specific target
+word, the syntactic environment of this word and how it relates to
+sentiment-bearing words in the context may clearly be of importance.
+In the following we present a modification of the scoring function described above to also take into account the syntactic environment of the target words. The function is defined over dependency graphs, i.e. connected, acyclic graphs expressing bilexical relations.
 
-\paragraph{Dependency distance}
-One way of expressing the syntactic environment of a target word with respect to a sentiment word is to determine its distance in the dependency graph. We define a distance function $\mathbf{depdist}(kw_i, sw_{j})$ which returns the number of nodes between the two words in the parse tree plus one.
+\paragraph{Dependency distance} One way of expressing the syntactic environment of a target word with respect to a sentiment word is to determine its distance in the dependency graph. We therefore define a distance function $\mathbf{depdist}(kw_i, sw_{j})$ which returns the number of nodes in the shortest dependency path from the target word to the sentiment word in the dependency.
 
-LILJA:OM DEPENDENCY DISTANCE?
-
+\paragraph{Dependency paths}
 A second way of determining the importance of a sentiment word towards a target based on syntactically parsed texts, is to establish a list of grammatical dependency paths between words, and test whether such paths exist between the target and the sentiment words in the material under investigation \cite{Jiang11}. The assumption would be that, if there is a meaningful grammatical relation between a target and a sentiment word, it is likely that they are semantically related to each other. Furthermore, it is reasonable to expect than some paths are stronger indicators of the overall sentiment of the sentence than others. To test this method, we have made a list of 42 grammatical dependency paths and given them a score between 1-3. The higher the score is, the better indicator of sentiment the path is assumed to be. In the following paragraphs, we will present our reasoning behind the choice of paths and the weight we have given them. The paths are written as follows: postag-target:postag-sentiment word{\textunderscore}{\textunderscore}DEPREL{\textunderscore}up/dn({\textunderscore}{\textunderscore}DEPREL{\textunderscore}up/dn etc.). \emph{Up} and \emph{dn} show whether you move up or down in the dependency tree. So the relation between a noun target and a verb sentiment word where the noun is the subject of the verb, is represented as subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up. The relation between a target noun and a sentiment noun where the former is the subject and the latter is the direct object of the same verb, is subst:subst{\textunderscore}{\textunderscore}SUBST{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn.
 
 A first group consists of paths from subject targets to sentiment predicates. Such paths can e.g. go from a subject to a verbal predicate, subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up, as in (\ref{verbpred}), or from a subject to an adjectival or nominal predicate in the context of a copular verb, as in (\ref{adpred}), subst:adj{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn or subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn.
@@ -159,8 +160,8 @@ We suspect paths internal to the nominal phrase to be relatively good indicators
 
 Some complex paths receive a lower score than those indicated here, to compensate for parser inaccuracies.
 
-
-Let $\mathcal{D}$ denote the set of all important grammatical relations. The function $\mathbf{gram}(kw_i, sw_{j})$ returns the grammatical relation, and if $\mathbf{gram}(kw_i, sw_{j}) \in \mathcal{D}$, then the function $W_{\mathbf{dep}}(kw_i, sw_{j}) \in [0,1]$, returns the importance of the grammatical relation. Further let $\mathbf{treedist}(kw_i, sw_{j})$ return the number of words between the two words in the parse tree plus one. The \textbf{imp} function is computed as follows. If $\mathbf{gram}(kw_i, sw_{j}) \in \mathcal{D}$ we use
+\paragraph{Modified scoring function}
+Let $\mathcal{D}$ denote the set of all important grammatical relations. The function $\mathbf{gram}(kw_i, sw_{j})$ returns the grammatical relation, and if $\mathbf{gram}(kw_i, sw_{j}) \in \mathcal{D}$, then the function $W_{\mathbf{dep}}(kw_i, sw_{j}) \in [0,1]$, returns the importance of the grammatical relation. Further let $\mathbf{depdist}(kw_i, sw_{j})$ return the dependency distance, as described above. The \textbf{imp} function is computed as follows. If $\mathbf{gram}(kw_i, sw_{j}) \in \mathcal{D}$ we use
 \begin{align}
   \begin{split}
     \label{eq:3}
