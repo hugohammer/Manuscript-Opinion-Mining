@@ -16,15 +16,30 @@
 
 \linespread{1.0}
 
+\title{Sentiment classification of online political discussion -- a comparison of two methods}
+
+\author{First Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} \\\And
+  Second Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} \\}
+
+\date{}
+
 \begin{document}
 
-\begin{center}
-  \textbf{\Large{Classifying opinions in online political discussion -- comparison of two methods}}
+%% \begin{center}
+%%   \textbf{\Large{Classifying opinions in online political discussion -- comparison of two methods}}
 
-\vspace{5mm}
+%% \vspace{5mm}
 
-\end{center}
-
+%% \end{center}
+\maketitle
 \begin{abstract}
 Bla bla
 \end{abstract}
@@ -36,24 +51,42 @@ keywords: \textit{}
 
 Over the past years there has been an alarming growth in hate against minorities like Muslims, Jews, Gypsies and gays in Europe, driven by right wing populism parties and extremist organizations \cite{r4,r11}. A similar increase in hate speech has been observed on the Internet \cite{r6,s2}, and experts are concerned that individuals influenced by this web content may resort to violence as a result \cite{Strommen12,Sunde13}. Hateful speech is not only observed on extremist sites, but also as comments on e.g. Twitter, YouTube and online newspaper articles.  
 
-Social media and online discussions contain a wealth of information which can make us able to understand the extent of hate speech on the Internet. However, it turns out that academia is lacking research on social media and online radicalization \cite{s1}. Opinion mining is the discipline of automatically extracting opinions from a text material and may be one important tool in the understanding online radicalization. Opinion mining has mostly been used to analyze opinions in comments and reviews about commercial products, but there are also examples of opinion mining towards political tweets and discussions, see e.g. Tumasjan et al. \shortcite{Tumasjan2010}; Chen et al. \shortcite{Chen10}. Opinion mining towards political discussions is known to be hard since citations, irony and sarcasm is very common \cite{Bing12}.
+Social media and online discussions contain a wealth of information which can make us able to understand the extent of hate speech on the Internet. However, it turns out that academia is lacking research on social media and online radicalization \cite{s1}. Sentiment analysis (SA) is the discipline of automatically determining sentiment in text material and may be one important tool in the understanding of online radicalization. SA has mostly been used to analyze opinions in comments and reviews about commercial products, but there are also examples of SA towards political tweets and discussions, see e.g. Tumasjan et al. \shortcite{Tumasjan2010}; Chen et al. \shortcite{Chen10}. SA of political discussions is known to be a difficult task since citations, irony and sarcasm is very common \cite{Bing12}.
 
-Opinion classification is perhaps the most studied topic within opinion mining. It aims to classify a set of text as either positive or negative and sometimes also neutral. There are mainly two approaches, one based on machine learning and one based on based on using a list of words with given sentiment scores (lexical approach). One simple lexical approach is to count the number of words with positive and negative sentiment in the document as suggested by Hu and Liu \shortcite{Hu04}. One may classify the opinion of larger documents like movie or product reviews or smaller documents like tweets, comments or sentences. See Liu \shortcite{Bing12}, chapters three to five and references therein for the description of several opinion classification methods. 
+Sentiment classification aims to classify a document or sentence as either positive or negative and sometimes also neutral. There are mainly two approaches, one based on machine learning and one based on based on using a list of words with given sentiment scores (lexicon-based approach). One simple lexicon-based approach is to count the number of words with positive and negative sentiment in the document as suggested by Hu and Liu \shortcite{Hu04}. One may classify the opinion of larger documents like movie or product reviews or smaller documents like tweets, comments or sentences. %% See Liu \shortcite{Bing12}, chapters three to five and references therein for the description of several opinion classification methods. 
 
-In this paper we focus on classifying the opinion toward religious/political topics, say the Quran, in political discussion by using the lexical-based approach. 
-One intuitive approach is to find both the keyword (e.g. Quran) and the words with sentiment in the sentence and classify the sentiment of the sentence based on the polarity of these sentiment words. We expect that statistically the importance of a sentiment word towards the keyword is related to the number of words between the sentiment and key word as suggested by Ding et al. \shortcite{Ding08}. Two other approaches is to automatically parse the material and either use the distance between key and sentiment word in the parse tree or develop grammatical dependence paths, see e.g. Jiang et al. \shortcite{Jiang11}. The aim of this paper is to compare the performance of a word distance method \cite{Ding08} with novel methods based on distance in parse tree and grammatical dependence paths to classify opinions in political discussions.
+In this paper we focus on classifying the sentiment towards
+religious/political topics, say the Quran, in Norwegian political
+discussion. We use a lexicon-based approach where we classify the
+sentiment of a sentence based on the polarity of sentiment words in
+relation to a set of target words. We expect that statistically the
+importance of a sentiment word towards the keyword is related to the
+number of words between the sentiment and key word as suggested by
+Ding et al. \shortcite{Ding08}.  Information about the syntactic
+environment of certain words or phrases has in previous work also been
+shown to be useful for the task of sentiment classification
+\cite{Wil:Wie:Hof:09,Jiang11}. In this work we therefore compare the
+results obtained using a token-based distance measure with a novel
+syntax-based distance measure obtained using dependency graphs and
+further augmented with linguistically motivated syntactic patterns
+expressed as dependency paths.  We furthermore present a freely
+available corpus of Norwegian political discussion related to religion
+and immigration, which has been manually annotated for the sentiment
+expressed towards a set of target words, as well as a manually translated sentiment lexicon.
+
+%% In this paper we focus on classifying the opinion toward religious/political topics, say the Quran, in political discussion by using the lexical-based approach. One intuitive approach is to find both the keyword (e.g. Quran) and the words with sentiment in the sentence and classify the sentiment of the sentence based on the polarity of these sentiment words. We expect that statistically the importance of a sentiment word towards the keyword is related to the number of words between the sentiment and key word as suggested by Ding et al. \shortcite{Ding08}. Two other approaches is to automatically parse the material and either use the distance between key and sentiment word in the parse tree or develop grammatical dependence paths, see e.g. Jiang et al. \shortcite{Jiang11}. The aim of this paper is to compare the performance of a word distance method \cite{Ding08} with novel methods based on distance in parse tree and grammatical dependence paths to classify opinions in political discussions.
 
 The paper is organized as follows. 
 
-\section{Opinion mining methods}
+\section{Proposed SA methods}
 \label{sec:om}
 
-In this Section we present two methods to classify sentences to either positive, neutral or negative towards a keyword. Both methods follow the same general algorithm presented below which is inspired by Ding et al. \shortcite{Ding08} and is based on a list of sentiment words each associated with a sentiment score representing the polarity and strength of the sentiment word (sentiment lexicon). Both keywords, sentiment words and sentiment shifters can in general appear several times in a sentence. Sentiment shifters is words that potentially shift the sentiment of a sentence from positive to negative or negative to positive. E.g. ``not happy'' have the opposite polarity than just ``happy''. Let $kw_i, i \in \{1,2,\ldots,I\}$ represent appearance number $i$ of the keyword in the sentence. Further let $sw_{j}, j \in \{1,2,\ldots,J\}$ be appearance number $j$ of a sentiment word in the sentence. Finally let $\textbf{ss} = (ss_1, ss_2, \ldots, ss_K)$ repressent the sentiment shifters in the sentence. We compute a sentiment score, $S$, for the sentence as follows
+In this Section we present two methods to classify sentences as either positive, neutral or negative towards a keyword. Both methods follow the same general algorithm presented below which is inspired by Ding et al. \shortcite{Ding08} and is based on a list of sentiment words each associated with a sentiment score representing the polarity and strength of the sentiment word (sentiment lexicon). Both keywords, sentiment words and sentiment shifters can in general appear several times in a sentence. Sentiment shifters are words that potentially shift the sentiment of a sentence from positive to negative or negative to positive. E.g. ``not happy'' have the opposite polarity than just ``happy''. Let $kw_i, i \in \{1,2,\ldots,I\}$ represent appearance number $i$ of the keyword in the sentence. Further let $sw_{j}, j \in \{1,2,\ldots,J\}$ be appearance number $j$ of a sentiment word in the sentence. Finally let $\textbf{ss} = (ss_1, ss_2, \ldots, ss_K)$ repressent the sentiment shifters in the sentence. We compute a sentiment score, $S$, for the sentence as follows
 \begin{equation}
   \label{eq:1}
   S = \frac{1}{I}\sum_{i=1}^{I} \sum_{j=1}^{J} \mathbf{imp}(kw_i, sw_{j})\mathbf{shift}(sw_{j}, \mathbf{ss})    
 \end{equation}
-where the function \textbf{imp} computes the importance of the sentiment word $sw_{j}$ on the keyword appearance $kw_i$. This will be computed in different ways as described below. Further, the function $\mathbf{shift}(sw_{j}, \mathbf{ss})$ computes whether the sentiment of $sw_{j}$ should be shifted based on all the sentiment shifters in the sentence. It returns $-1$ (sentiment shift) if some of the sentiment shifters is within $d_{p}$ words in front or $d_{n}$ words behind $sw_{j}$, respectively. Else the function, returns $1$ (no sentiment shift). We classify the opinion towards the keyword to be positive, neutral or negative if $S >= t_p$,  $t_p > S > t_n$ and  $S <= t_n$, respectively. The parameters $d_p, d_n, t_p$ and $t_n$ is tuned using a training set.
+where the function \textbf{imp} computes the importance of the sentiment word $sw_{j}$ on the keyword appearance $kw_i$. This will be computed in different ways as described below. Further, the function $\mathbf{shift}(sw_{j}, \mathbf{ss})$ computes whether the sentiment of $sw_{j}$ should be shifted based on all the sentiment shifters in the sentence. It returns $-1$ (sentiment shift) if some of the sentiment shifters is within $d_{p}$ words in front or $d_{n}$ words behind $sw_{j}$, respectively. Else the function, returns $1$ (no sentiment shift). We classify the sentiment towards the keyword to be positive, neutral or negative if $S >= t_p$,  $t_p > S > t_n$ and  $S <= t_n$, respectively. The parameters $d_p, d_n, t_p$ and $t_n$ is tuned using a training set.
 
 \subsection{Word distance method}
 \label{sec:wd}
@@ -67,12 +100,15 @@ where $\mathbf{sentsc}(sw_{j})$ is the sentiment score of $sw_{j}$ from the sent
 
 \subsection{Parse tree method}
 \label{sec:dp}
-LILJA: OM PARSING
+%LILJA: OM PARSING
+When determining the sentiment expressed towards a specific target
+word, the syntactic environment of this word and how it relates to
+sentiment-bearing words in the context may clearly be of importance.
+In the following we present a modification of the scoring function described above to also take into account the syntactic environment of the target words. The function is defined over dependency graphs, i.e. connected, acyclic graphs expressing bilexical relations.
 
-The parser used in this study is trained on the Norwegian Dependency Treebank (NDT). The NDT is a corpus built up at the National Library of Norway in the period 2011-2013, manually annotated with part-of-speech tags, morphological features, syntactic functions and dependency graphs \cite{Sol14, Sol13}. It consists of approximately 600 000 tokens, equally distributed between Norwegian Bokmål and Nynorsk, the two Norwegian written standards. Only the Bokmål subcorpus has been used here. A large proportion of the NDT is newspaper text, there are also parliament transcripts, government reports and texts with a more colloquial style from blogs. Detailed annotation guidelines in English will be made available in April 2014 \cite{Kinn2013}.
+\paragraph{Dependency distance} One way of expressing the syntactic environment of a target word with respect to a sentiment word is to determine its distance in the dependency graph. We therefore define a distance function $\mathbf{depdist}(kw_i, sw_{j})$ which returns the number of nodes in the shortest dependency path from the target word to the sentiment word in the dependency. The shortest path is determined using Dijkstra's shortest path algorithm \cite{Dij:59}.
 
-LILJA:OM DEPENDENCY DISTANCE?
-
+\paragraph{Dependency paths}
 A second way of determining the importance of a sentiment word towards a target based on syntactically parsed texts, is to establish a list of grammatical dependency paths between words, and test whether such paths exist between the target and the sentiment words in the material under investigation \cite{Jiang11}. The assumption would be that, if there is a meaningful grammatical relation between a target and a sentiment word, it is likely that they are semantically related to each other. Furthermore, it is reasonable to expect than some paths are stronger indicators of the overall sentiment of the sentence than others. To test this method, we have made a list of 42 grammatical dependency paths and given them a score between 1-3. The higher the score is, the better indicator of sentiment the path is assumed to be. In the following paragraphs, we will present our reasoning behind the choice of paths and the weight we have given them. The paths are written as follows: postag-target:postag-sentiment word{\textunderscore}{\textunderscore}DEPREL{\textunderscore}up/dn({\textunderscore}{\textunderscore}DEPREL{\textunderscore}up/dn etc.). \emph{Up} and \emph{dn} show whether you move up or down in the dependency tree. So the relation between a noun target and a verb sentiment word where the noun is the subject of the verb, is represented as subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up. The relation between a target noun and a sentiment noun where the former is the subject and the latter is the direct object of the same verb, is subst:subst{\textunderscore}{\textunderscore}SUBST{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn.
 
 A first group consists of paths from subject targets to sentiment predicates. Such paths can e.g. go from a subject to a verbal predicate, subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up, as in (\ref{verbpred}), or from a subject to an adjectival or nominal predicate in the context of a copular verb, as in (\ref{adpred}), subst:adj{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn or subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn.
@@ -92,7 +128,7 @@ yes now exult probably muslims+the
 
 \end{examples}
 
-We have chosen to give subject-predicate paths the highest possible score, 3. Firstly, the combination of a subject and a predicate will result in a proposition, a statement which is evaluated as true or false \cite{Heim98}. We expect that a proposition typically will represent the opinion of the speaker, although e.g. irony and certain kinds of embedding can shift the truth evaluation in some cases \cite{Hooper73}. Secondly, if the predicate represents an event brought about by an intentional agent, such as \emph{jubler}, 'exult', in (\ref{verbpred}), the subject will typically represent that agent. If the predicate has a positive or negative sentiment, we expect that this sentiment is directed towards this intentional agent. 
+We have chosen to give subject-predicate paths the highest possible score, 3. Firstly, the combination of a subject and a predicate will result in a proposition, a statement which is evaluated as true or false \cite{Heim98}. We expect that a proposition typically will represent the sentiment of the speaker, although e.g. irony and certain kinds of embedding can shift the truth evaluation in some cases \cite{Hooper73}. Secondly, if the predicate represents an event brought about by an intentional agent, such as \emph{jubler}, 'exult', in (\ref{verbpred}), the subject will typically represent that agent. If the predicate has a positive or negative sentiment, we expect that this sentiment is directed towards this intentional agent. 
 
 A second group we have considered, contains paths from subject targets to sentiment words embedded within the predicate. Examples of such paths are those from the subject to the nominal direct object of a verb, as in (\ref{subjobj}), subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn. Paths from subjects into different kinds of adverbials are also a part of this group.
 
@@ -139,8 +175,8 @@ We suspect paths internal to the nominal phrase to be relatively good indicators
 
 Some complex paths receive a lower score than those indicated here, to compensate for parser inaccuracies.
 
-
-Let $\mathcal{D}$ denote the set of all important grammatical relations. The function $\mathbf{gram}(kw_i, sw_{j})$ returns the grammatical relation, and if $\mathbf{gram}(kw_i, sw_{j}) \in \mathcal{D}$, then the function $W_{\mathbf{dep}}(kw_i, sw_{j}) \in [0,1]$, returns the importance of the grammatical relation. Further let $\mathbf{treedist}(kw_i, sw_{j})$ return the number of words between the two words in the parse tree plus one. The \textbf{imp} function is computed as follows. If $\mathbf{gram}(kw_i, sw_{j}) \in \mathcal{D}$ we use
+\paragraph{Modified scoring function}
+Let $\mathcal{D}$ denote the set of all important dependency paths. The function $\mathbf{gram}(kw_i, sw_{j})$ returns the dependency path, and if $\mathbf{gram}(kw_i, sw_{j}) \in \mathcal{D}$, then the function $W_{\mathbf{dep}}(kw_i, sw_{j}) \in [0,1]$, returns the importance of the path. Further let $\mathbf{depdist}(kw_i, sw_{j})$ return the dependency distance, as described above. The \textbf{imp} function is computed as follows. If $\mathbf{gram}(kw_i, sw_{j}) \in \mathcal{D}$ we use
 \begin{align}
   \begin{split}
     \label{eq:3}
@@ -149,7 +185,7 @@ Let $\mathcal{D}$ denote the set of all important grammatical relations. The fun
   +&(1 - \alpha) \cdot \dfrac{\mathbf{sentsc}(sw_{j})}{\mathbf{treedist}(kw_i, sw_{j})}    
   \end{split}
 \end{align}
-where $\alpha \in [0,1]$ is a parameter that weights the score from the important dependence path and the tree distance and can be tuned using a training set. If $\mathbf{gram}(kw_i, sw_{j}) \not\in \mathcal{D}$ we simply use 
+where $\alpha \in [0,1]$ is a parameter that weights the score from the important dependency path and the tree distance and can be tuned using a training set. If $\mathbf{gram}(kw_i, sw_{j}) \not\in \mathcal{D}$ we simply use 
 \begin{equation}
   \label{eq:4}
   \mathbf{imp}(kw_i, sw_{j}) = \dfrac{\mathbf{sentsc}(sw_{j})}{\mathbf{treedist}(kw_i, sw_{j})}    
@@ -159,7 +195,7 @@ Note that when $\alpha = 0$, \eqref{eq:3} reduces to \eqref{eq:4}.
 \subsection{Statistical analysis of classification performance}
 \label{sec:sa}
 
-We compare the classification performance of a set of $M$ different methods, denoted as $\Pi_1, \Pi_2, \ldots, \Pi_M$, using random effect logistic regression. Let the stochastic variable $Y_{tm} \in \{0,1\}$ represents whether method $\Pi_m, \, m \in \{1,2,\ldots,M\}$ classified the correct opinion to sentence number $t \in \{1,2,\ldots,T\}$, where $T$ is the number of sentences in the test set. We let $Y_{tm}$ be the dependent variable of the regression model. The different methods $\Pi_1, \Pi_2, \ldots, \Pi_M$ is included as a categorical independent variable in the regression model. We also assume that classification performance of the different methods depends on the sentence to be classified, thus the sentence number is included as a random effect. The regression model is formulated as
+We compare the classification performance of a set of $M$ different methods, denoted as $\Pi_1, \Pi_2, \ldots, \Pi_M$, using random effect logistic regression. Let the stochastic variable $Y_{tm} \in \{0,1\}$ represents whether method $\Pi_m, \, m \in \{1,2,\ldots,M\}$ classified the correct sentiment to sentence number $t \in \{1,2,\ldots,T\}$, where $T$ is the number of sentences in the test set. We let $Y_{tm}$ be the dependent variable of the regression model. The different methods $\Pi_1, \Pi_2, \ldots, \Pi_M$ is included as a categorical independent variable in the regression model. We also assume that classification performance of the different methods depends on the sentence to be classified, thus the sentence number is included as a random effect. The regression model is formulated as
 \begin{align}
   \label{eq:5}
   \begin{split}
@@ -172,22 +208,21 @@ where $\epsilon_t$ is the sentence number random effect and $\epsilon_{tm}$ is a
 The statistical analysis is performed using the statistical program R \cite{R} and the R package \verb|lme4| \cite{lme4}.
 
 
-\section{Real data example}
+\section{Linguistic resources}
 \label{sec:results}
 
-\subsection{Text material}
+\subsection{Sentiment corpus}
 
-We did not find any suitable annotated text material related to political discussions and therefore created our own. We manually selected 46 debate articles from the Norwegian online newspapers \textit{NRK Ytring, Dagbladet, Aftenposten, VG and Bergens Tidene}. To each debate article there were attached a discussion thread where readers could express their opinions and feelings towards the content of the debate article. All the text from the debate articles and the subsequent discussions were collected using text scraping \cite{Hammer13}. The debate articles were related to religion and immigration and we wanted to classify the opinion towards all words with stem: \textit{islam, muslim, quran, allah, muhammed, imam and mosque}. These are topics that typically creates a lot of active discussions and disagreements.
+We did not find any suitable annotated text material related to political discussions and therefore created our own. We manually selected 46 debate articles from the Norwegian online newspapers \textit{NRK Ytring, Dagbladet, Aftenposten, VG and Bergens Tidene}. To each debate article there were attached a discussion thread where readers could express their opinions and feelings towards the content of the debate article. All the text from the debate articles and the subsequent discussions were collected using text scraping \cite{Hammer13}. The debate articles were related to religion and immigration and we wanted to classify the sentiment towards all words with stem: \textit{islam, muslim, quran, allah, muhammed, imam and mosque}. These are topics that typically create a lot of active discussions and disagreements.
 
-We automatically divided the material into sentences and all sentences containing at least one keyword and one sentiment word were kept for further analysis. If a sentence contained more than one keyword, e.g. both Islam and Quran, the sentence were repeated one time for each keyword in the final text material. We could then classify the opinion towards each of the keywords in the sentence consecutively. To assure that we do not underestimate the uncertainty in the statistical analysis, we see each repetition of the sentence as the same sentence with respect to the sentence random effect in the regression model in Section \ref{sec:sa}
+We automatically divided the material into sentences and all sentences containing at least one keyword and one sentiment word were kept for further analysis. If a sentence contained more than one keyword, e.g. both Islam and Quran, the sentence were repeated one time for each keyword in the final text material. We could then classify the sentiment towards each of the keywords in the sentence consecutively. To assure that we do not underestimate the uncertainty in the statistical analysis, we see each repetition of the sentence as the same sentence with respect to the sentence random effect in the regression model in Section \ref{sec:sa}
 
-Each sentence were manually annotated whether the commenter were positive, negative or neutral towards the keyword in the sentence. Each sentence were evaluated individually. The sentences were annotated based on all our knowledge, e.g. a sentence like ``Muhammed is like Hitler'' would be annotated as a negative opinion towards Muhammed. Further, if a commenter presented a negative fact about the keyword, the sentence would be denoted as negative.
+Each sentence was manually annotated as to whether the commenter was positive, negative or neutral towards the keyword in the sentence. Each sentence was evaluated individually. The sentences were annotated based on real-world knowledge, e.g. a sentence like ``Muhammed is like Hitler'' would be annotated as a negative sentiment towards Muhammed. Further, if a commenter presented a negative fact about the keyword, the sentence would be denoted as negative.
 
-A random sample of 65 sentences from the original text material were annotated by a second annotator. These sentences were not included in either the training or test set. For these sentences, the two annotators agreed on 58 of them, which is an 89\% agreement, with a 95\% confidence interval equal to (79\%, 95\%) assuming that each sentence is independent. Since the sentences is drawn randomly from the population of all sentences this is a fair assumption.
+In order to assess inter-annotator agreement, a random sample of 65 sentences from the original text material was annotated by a second annotator. These sentences were not included in either the training or test set. For these sentences, the two annotators agreed on 58, which is an 89\% agreement, with a 95\% confidence interval equal to (79\%, 95\%) assuming that each sentence is independent. Since the sentences are drawn randomly from the population of all sentences this is a fair assumption.
 
-Finally the material were divided in to two parts where the first half of the debate articles with subsequent discussions where in the training set and the rest were in the test set. The researcher working on finding the important dependence paths, did only use the training set and did never see the test set before the decisions about dependence paths were decided. After the division, the training and test set consisted of a total of 382 and 308 sentences, respectively. Table \ref{tab:1} summarizes the opinions in the sentences
+Finally the material was divided into two parts where the first half of the debate articles with subsequent discussions make up the training set and the rest constitutes a held-out test set. In the development of the important dependency paths, only the training set was used. After the division, the training and test set consisted of a total of 382 and 308 sentences, respectively. Table \ref{tab:1} summarizes the sentiments in the sentences.
 \begin{table}
-  \caption{Manual annotation of training and test set.}
   \centering
   \begin{tabular}{lcccc}
              & Negative & Neutral & Positive \\\hline
@@ -195,22 +230,45 @@ Finally the material were divided in to two parts where the first half of the de
     Test     & 102 (33\%)& 182 (59\%) & 24 (8\%)
   \end{tabular}
   \label{tab:1}
+  \caption{Manual annotation of training and test set.}
 \end{table}
+
+\subsection{Corpus postprocessing}
+The sentiment corpus was PoS-tagged and parsed using the
+Bohnet\&Nivre-parser \cite{Boh:Niv:12}. This parser is a
+transition-based dependency parser with joint tagger that implements
+global learning and a beam search for non-projective labeled
+dependency parsing.  This latter parser has recently outperformed
+pipeline systems (such as the Malt and MST parsers) both in terms of
+tagging and parsing accuracy for typologically diverse languages such
+as Chinese, English, and German. It has been reported to obtain a
+labeled accuracy of 87.7 for Norwegian \cite{Sol14}.  The parser is
+trained on the Norwegian Dependency Treebank (NDT). The NDT is a
+treebank created at the National Library of Norway in the period
+2011-2013, manually annotated with part-of-speech tags, morphological
+features, syntactic functions and dependency graphs \cite{Sol14,
+ Sol13}. It consists of approximately 600 000 tokens, equally
+distributed between Norwegian Bokm{\aa}l and Nynorsk, the two Norwegian
+written standards. Only the Bokm{\aa}l subcorpus has been used here. A
+large proportion of the NDT is newspaper text, there are also
+parliament transcripts, government reports and texts with a more
+colloquial style from blogs. Detailed annotation guidelines in English
+will be made available in April 2014 \cite{Kinn2013}.
 
 \subsection{Sentiment lexicon and sentiment shifters}
 
 Unfortunately, no sentiment lexicon existed for the Norwegian language and therefore we developed our own by manually translating the AFINN list \cite{Nielsen11}. We also manually added 1590 words relevant to political discussions  like 'deport', 'expel', 'extremist' and 'terrorist', ending up with a list of 4067 Norwegian sentiment words. Each word were given a score from $-5$ to $5$ ranging from words with extremely negative sentiment (e.g. 'behead') to highly positive sentiment words (e.g. 'breathtaking').
 
-Several Norwegian sentiment shifters were considered but only the basic shifter 'not' improved the opinion classification and therefore only this word were used in the method.
+Several Norwegian sentiment shifters were considered but only the basic shifter 'not' improved the sentiment classification and therefore only this word were used in the method.
 
-\subsection{Classification performance}
+\section{Experiments}
 
 In this study we compared four different methods based on the general algorithm in \eqref{eq:1}.
 \begin{itemize}
 \item We use the \textbf{imp}-function presented in \eqref{eq:2}. We denote this method WD (word distance).
-\item For this method and the two below we use the \textbf{imp}-function in \eqref{eq:3}. Further we set $\alpha = 0$ which means that we do not use the important dependence paths. We denote this method A0 ($\alpha = 0$).
+\item For this method and the two below we use the \textbf{imp}-function in \eqref{eq:3}. Further we set $\alpha = 0$ which means that we do not use the important dependency paths. We denote this method A0 ($\alpha = 0$).
 \item We set $\alpha = 1$ and for all dependency paths we set $W_{\mathbf{dep}} = 2/3$. We denote this method CW (constant weights).
-\item We set $\alpha = 1$ and for $W_{\mathbf{dep}}$ we use the weights presented in Table ??????. We denote this method OD (optimal use of dependence paths)
+\item We set $\alpha = 1$ and for $W_{\mathbf{dep}}$ we use the weights presented in Table ??????. We denote this method OD (optimal use of dependency paths)
 \end{itemize}
 For each method we used the training set to manually tune the parameters $d_p, d_n, t_p$ and $t_n$ of the method. The parameters were tuned to optimize the number of correct classifications.
 
@@ -227,14 +285,14 @@ Table \ref{tab:2} shows the optimal parameter values of $d_p, d_n, t_p$ and $t_n
   \end{tabular}
   \label{tab:2}
 \end{table}
-We see that the sentiment shifter 'not' only have a positive effect on the classification performance when it is in front of the sentiment word. We see that using dependence tree distances (method A0) the classification results is significantly improved compared to using word distances in the sentence (method WD) (p-value = 0.023). Also classification based on important dependence paths (method OD) performs significantly better than WD. We also see that OD performs better than A0 (162 correct compared to 161), but this improvement is not statistically significant. 
+We see that the sentiment shifter 'not' only have a positive effect on the classification performance when it is in front of the sentiment word. We see that using dependency distances (method A0) the classification results is significantly improved compared to using word distances in the sentence (method WD) (p-value = 0.023). Also classification based on important dependency paths (method OD) performs significantly better than WD. We also see that OD performs better than A0 (162 correct compared to 161), but this improvement is not statistically significant. 
 
 \section{Closing remarks}
 \label{sec:cr}
 
-Classifying opinions in political discussions is hard because of the frequent use of irony, sarcasm and citations. In this paper we have compared the use of word distance between keyword and sentiment word against metrics related to parsed sentence information. Our results show that using dependence tree distances or important dependence paths, improves the classification performance compared to using word distance. 
+Classifying sentiment in political discussions is hard because of the frequent use of irony, sarcasm and citations. In this paper we have compared the use of word distance between keyword and sentiment word against metrics related to parsed sentence information. Our results show that using dependency tree distances or important dependency paths, improves the classification performance compared to using word distance. 
 
-Manually selecting important dependence paths for the aim of opinion mining is a hard task. A natural further step of our analysis is to expand the training and test material and use machine learning to see if there exists dependence paths that improve results compared to using dependence tree distance.
+Manually selecting important dependency paths for the aim of sentiment analysis is a hard task. A natural further step of our analysis is to expand the training and test material and use machine learning to see if there exists dependency paths that improve results compared to using dependency distance.
 
 \bibliography{bibl}
 
