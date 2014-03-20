@@ -109,71 +109,30 @@ In the following we present a modification of the scoring function described abo
 \paragraph{Dependency distance} One way of expressing the syntactic environment of a target word with respect to a sentiment word is to determine its distance in the dependency graph. We therefore define a distance function $\mathbf{depdist}(kw_i, sw_{j})$ which returns the number of nodes in the shortest dependency path from the target word to the sentiment word in the dependency. The shortest path is determined using Dijkstra's shortest path algorithm \cite{Dij:59}.
 
 \paragraph{Dependency paths}
-A second way of determining the importance of a sentiment word towards a target based on syntactically parsed texts, is to establish a list of grammatical dependency paths between words, and test whether such paths exist between the target and the sentiment words in the material under investigation \cite{Jiang11}. The assumption would be that, if there is a meaningful grammatical relation between a target and a sentiment word, it is likely that they are semantically related to each other. Furthermore, it is reasonable to expect than some paths are stronger indicators of the overall sentiment of the sentence than others. To test this method, we have made a list of 42 grammatical dependency paths and given them a score between 1-3. The higher the score is, the better indicator of sentiment the path is assumed to be. In the following paragraphs, we will present our reasoning behind the choice of paths and the weight we have given them. The paths are written as follows: postag-target:postag-sentiment word{\textunderscore}{\textunderscore}DEPREL{\textunderscore}up/dn({\textunderscore}{\textunderscore}DEPREL{\textunderscore}up/dn etc.). \emph{Up} and \emph{dn} show whether you move up or down in the dependency tree. So the relation between a noun target and a verb sentiment word where the noun is the subject of the verb, is represented as subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up. The relation between a target noun and a sentiment noun where the former is the subject and the latter is the direct object of the same verb, is subst:subst{\textunderscore}{\textunderscore}SUBST{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn.
+A second way of determining the importance of a sentiment word towards a target based on syntactically parsed texts, is to establish a list of grammatical dependency paths between words, and test whether such paths exist between the targets and sentiment words \cite{Jiang11}. The assumption would be that two words most likely are semantically related to each other if there is a meaningful grammatical relation between them. Furthermore, it is reasonable to expect than some paths are stronger indicators of the overall sentiment of the sentence than others. To test this method, we have made a list of 42 grammatical dependency paths, devided into four groups, and gave them a score between 1-3. The higher the score is, the better indicator of sentiment the path is assumed to be. In the following paragraphs, we will briefly present the groups of paths and the maximum score we have assigned in each group. The paths are written as follows: postag-target:postag-sentiment word{\textunderscore}{\textunderscore}DEPREL{\textunderscore}up/dn({\textunderscore}{\textunderscore}DEPREL{\textunderscore}up/dn etc.). \emph{Up} and \emph{dn} show whether you move up or down in the dependency tree.
 
-A first group consists of paths from subject targets to sentiment predicates. Such paths can e.g. go from a subject to a verbal predicate, subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up, as in (\ref{verbpred}), or from a subject to an adjectival or nominal predicate in the context of a copular verb, as in (\ref{adpred}), subst:adj{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn or subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn.
+A first group consists of paths from subject targets to sentiment predicates. Such paths can e.g. go from a subject to a verbal predicate, subst:verb{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up, or from a subject to an adjectival or nominal predicate in the context of a copular verb, subst:adj/subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}SPRED{\textunderscore}dn. Paths in this group can get the maximum score, 3. The combination of a subject and a predicate will result in a proposition, and we expect propositions to represent the opinion of the speaker in many cases. Also, the subject will often refer to the intentional agent of an event. If the predicate has a positive or negative sentiment, we expect that this sentiment is directed towards this intentional agent. 
 
-\begin{examples}
-\item\label{verbpred}
-\gll Ja, n{\aa} \textbf{jubler(sent.w.)} vel \textbf{muslimene(target)}.
-yes now exult probably muslims+the
-\glt 'Yes, the muslims probably exult now.'
-\glend
+A second group we have considered, contains paths from subject targets to sentiment words embedded within the predicate, such as from the subject to the nominal direct object of a verb, subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn. Paths from subjects into different kinds of adverbials are also a part of this group. We consider paths from subjects to objects good indicators of sentiment and give them the highest score, 3, based on the same arguments as for subject-predicate paths. Paths into averbials get lower values, as adverbials often are less semantically connected to the predicate than objects.
 
-\item\label{adpred}
-\gll [...] for meg er \textbf{Muhammed(target)} like \textbf{levende(sent.w.)} som min far [...].
-{} for me is Muhammad as alive as my father {}
-\glt 'To me, Muhammad is as much alive as my dad is.'
-\glend
+The paths in our third group go from targets to sentiment words within the predicate. These include paths from nominal direct object target to verbal predicates, subst:verb{\textunderscore}{\textunderscore}DOBJ{\textunderscore}up, and from various kinds of adverbials to verbal predicates, etc. We assume that predicate-internal paths are less good indicators of sentiment than the above groups, as such paths do not constitute a proposition. Also, arguments within the predicate usually do not represent intentional agents. Such paths will get the score 1.
 
-\end{examples}
+Our fourth and final group of dependency paths contains paths internal to the nominal phrase, such as from target nouns to attributive adjectives, subst:adj{\textunderscore}{\textunderscore}ATR{\textunderscore}dn, and from target complements of attributive prepositions to target nouns, subst:subst{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}up{\textunderscore}{\textunderscore}ATR{\textunderscore}up. A positively or negatively qualified noun will probably often represent the sentiment of the speaker. At the same time, a nominal phrase of this kind can be used in many different contexts where the holder of the sentiment is not the speaker. We assign 2 as the maximum score. Table \ref{deppath} summarizes the groups of dependency paths.
 
-We have chosen to give subject-predicate paths the highest possible score, 3. Firstly, the combination of a subject and a predicate will result in a proposition, a statement which is evaluated as true or false \cite{Heim98}. We expect that a proposition typically will represent the sentiment of the speaker, although e.g. irony and certain kinds of embedding can shift the truth evaluation in some cases \cite{Hooper73}. Secondly, if the predicate represents an event brought about by an intentional agent, such as \emph{jubler}, 'exult', in (\ref{verbpred}), the subject will typically represent that agent. If the predicate has a positive or negative sentiment, we expect that this sentiment is directed towards this intentional agent. 
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline \bf Path group & \bf Number & \bf Score range \\ \hline
+Subj. to pred. & 9 & 3 \\
+Subj. to pred.-internal & 13 & 3-1 \\
+Pred.-internal & 6 & 1 \\
+NP-internal & 14 & 2-1 \\
+\hline
+\end{tabular}
+\end{center}
+\caption{\label{deppath} Dependency paths}
+\end{table}
 
-A second group we have considered, contains paths from subject targets to sentiment words embedded within the predicate. Examples of such paths are those from the subject to the nominal direct object of a verb, as in (\ref{subjobj}), subst:subst{\textunderscore}{\textunderscore}SUBJ{\textunderscore}up{\textunderscore}{\textunderscore}DOBJ{\textunderscore}dn. Paths from subjects into different kinds of adverbials are also a part of this group.
-
-\begin{examples}
-\item\label{subjobj}
-\gll [...] ekstreme \textbf{muslimer(target)} beg{\aa}r \textbf{voldshandlinger(sent.w.)} [...].
-{} extreme muslims commit {violent acts} {}
-\glt 'Extreme muslims commit violent acts.'
-\glend
-\end{examples}
-
-We consider paths from subjects to objects good indicators of sentiment and therefore give them the highest score, 3. The reasoning is much the same as for subject predicate paths: The statement is a proposition and the subject will often be the agent of the event. Also, the object, being an obligatory argument of the verb, is presumably closely semantically connected to it. Paths from subjects to adverbials, on the other hand, get a lower score, 2. This is because our experience is that the parser performs less well on adverbials. Also, adverbials are not obligatory arguments, and we therefore expect more semantic variation than for objects.
-
-The paths in our third group go from targets to sentiment words within the predicate. These include paths from nominal direct object target to verbal predicates, as in (\ref{objverb}), subst:verb{\textunderscore}{\textunderscore}DOBJ{\textunderscore}up, and from various kinds of adverbials to verbal predicates, among other things:
-
-\begin{examples}
-\item\label{objverb}
-\gll En Norsk dommer skal kontant \textbf{avvise(sent.w.)} \textbf{Sharia(target)} [...].
-a Norwegian judge shall strictly reject sharia {}
-\glt 'A Norwegian judge must strictly reject sharia.'
-\glend
-\end{examples}
-
-We assume that predicate-internal paths are less good indicators of sentiment than the above groups, as predicates need to combine with a subject to form a proposition. Also, arguments within the predicate usually do not represent the intentional agent of the event. Such paths will get the score 1.
-
-Our fourth and final group of dependency paths contains paths internal to the nominal phrase, such as from target nouns to attributive adjectives, as in (\ref{adjatr}), subst:adj{\textunderscore}{\textunderscore}ATR{\textunderscore}dn, and from target complements of attributive prepositions to target nouns, as in (\ref{substatr}), subst:subst{\textunderscore}{\textunderscore}PUTFYLL{\textunderscore}up{\textunderscore}{\textunderscore}ATR{\textunderscore}up:
-
-\begin{examples}
-\item\label{adjatr}
-\gll [...] \textbf{fundamentalistisk(sent.w.}) \textbf{islam(target)} [...]
-{} fundamentalist Islam {}
-\glt 'fundamentalist Islam'
-\glend
-
-\item\label{substatr}
-\gll [...] \textbf{kampen(sent.w} mot \textbf{islam(target)} [...]
-{} fight+the against Islam {}
-\glt 'the fight against Islam'
-\glend
-
-\end{examples}
-
-We suspect paths internal to the nominal phrase to be relatively good indicators of sentiment: A positively or negatively qualified noun will probably often represent the sentiment of the speaker. At the same time, a nominal phrase of this kind can be used in many different contexts where the holder of the sentiment is not the speaker, so we therefore expect such paths to be somewhat less good indicators than subject-predicate paths. We therefore assign them the score 2.
-
-Some complex paths receive a lower score than those indicated here, to compensate for parser inaccuracies.
 
 \paragraph{Modified scoring function}
 Let $\mathcal{D}$ denote the set of all important dependency paths. The function $\mathbf{gram}(kw_i, sw_{j})$ returns the dependency path, and if $\mathbf{gram}(kw_i, sw_{j}) \in \mathcal{D}$, then the function $W_{\mathbf{dep}}(kw_i, sw_{j}) \in [0,1]$, returns the importance of the path. Further let $\mathbf{depdist}(kw_i, sw_{j})$ return the dependency distance, as described above. The \textbf{imp} function is computed as follows. If $\mathbf{gram}(kw_i, sw_{j}) \in \mathcal{D}$ we use
