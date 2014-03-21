@@ -18,15 +18,26 @@
 
 \title{Sentiment classification of online political discussions: a comparison of a word-based and dependency-based method}
 
-\author{Hugo Lewi Hammer \\
-  Oslo and Akershus \\ University College \\ Department of Computer Science \\
-  {\tt hugo.hammer@hioa.no} \\ \And
-  Per Erik Solberg \\
-   Spr\aa kbanken \\ The National Library \\ of Norway\\
-  {\tt p.e.solberg@ifikk.uio.no}\\ \And
-  Lilja \O vrelid \\
-   Department of Informatics \\ University of Oslo\\
-  {\tt liljao@ifi.uio.no}}
+\author{First Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} \\\And
+  Second Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} \\}
+
+%% \author{Hugo Lewi Hammer \\
+%%   Oslo and Akershus \\ University College \\ Department of Computer Science \\
+%%   {\tt hugo.hammer@hioa.no} \\ \And
+%%   Per Erik Solberg \\
+%%    Spr\aa kbanken \\ The National Library \\ of Norway\\
+%%   {\tt p.e.solberg@ifikk.uio.no}\\ \And
+%%   Lilja \O vrelid \\
+%%    Department of Informatics \\ University of Oslo\\
+%%   {\tt liljao@ifi.uio.no}}
 
 \date{}
 
@@ -41,7 +52,7 @@
 \maketitle
 \begin{abstract}
 Online political discussions have received a lot of attention over the past years. In this paper we compare two sentiment lexicon approaches to classify the sentiment of sentences from political discussions.
-The first approach is based on applying the number of words between the target and the sentiment words to weight the sentence sentiment score. The second approach is based on using the shortest paths between target and sentiment words in a dependency graph and linguistically motivated syntactic patterns expressed as dependence paths. The methods is tested on a corpus of sentences from online Norwegian political discussions. The results show that the method based on dependency graph performs significantly better than the first approach. 
+The first approach is based on applying the number of words between the target and the sentiment words to weight the sentence sentiment score. The second approach is based on using the shortest paths between target and sentiment words in a dependency graph and linguistically motivated syntactic patterns expressed as dependency paths. The methods are tested on a corpus of sentences from online Norwegian political discussions. The results show that the method based on dependency graphs performs significantly better than the word-based approach. 
 \end{abstract}
 
 %keywords: \textit{}
@@ -55,7 +66,7 @@ The first approach is based on applying the number of words between the target a
 
 %hate and racism against is observed against minorities like Muslims, Jews, Gypsies and gays . Social media and online discussions contain a wealth of information which can make us able to understand the diversity of political opinions on the Internet. However, it turns out that academia is lacking research on social media and online radicalization \cite{s1}. 
 
-Over the past years online political discussions have received a lot of attention. E.g. the Obama 2012 election team initiated an extensive use of text analytics and machine learning techniques towards online material to guide advertising campaigns, identifying key voters, and improve fundraising \cite{Issenberg12}. There also has been a lot of concert about the alarming growth in hate and racism against minorities like Muslims, Jews and Gypsies in online discussions \cite{r6,s2}. Sentiment analysis (SA) is the discipline of automatically determining sentiment in text material and may be one important tool in understanding the diversity of opinions on the Internet. SA has mostly been used to analyze opinions in comments and reviews about commercial products, but there are also examples of SA towards political tweets and discussions, see e.g. Tumasjan et al. \shortcite{Tumasjan2010}; Chen et al. \shortcite{Chen10}. SA of political discussions is known to be a difficult task since citations, irony and sarcasm is very common \cite{Bing12}.
+Over the past years online political discussions have received a lot of attention. E.g. the Obama 2012 election team initiated an extensive use of text analytics and machine learning techniques towards online material to guide advertising campaigns, identifying key voters, and improve fundraising \cite{Issenberg12}. There has also been a lot of concern about the alarming growth in hate and racism against minorities like Muslims, Jews and Gypsies in online discussions \cite{r6,s2}. Sentiment analysis (SA) is the discipline of automatically determining sentiment in text material and may be one important tool in understanding the diversity of opinions on the Internet. SA has mostly been used to analyze opinions in comments and reviews about commercial products, but there are also examples of SA towards political tweets and discussions, see e.g. Tumasjan et al. \shortcite{Tumasjan2010}; Chen et al. \shortcite{Chen10}. SA of political discussions is known to be a difficult task since citations, irony and sarcasm is very common \cite{Bing12}.
 
 %Sentiment classification aims to classify a document or sentence as either positive or negative and sometimes also neutral. There are mainly two approaches, one based on machine learning and one based on based on using a list of words with given sentiment scores (lexicon-based approach). One simple lexicon-based approach is to count the number of words with positive and negative sentiment in the document as suggested by Hu and Liu \shortcite{Hu04}. One may classify the opinion of larger documents like movie or product reviews or smaller documents like tweets, comments or sentences. %% See Liu \shortcite{Bing12}, chapters three to five and references therein for the description of several opinion classification methods. 
 
@@ -87,7 +98,7 @@ translated sentiment lexicon.
 \section{Proposed SA methods}
 \label{sec:om}
 
-In this section we present two methods to classify sentences as either positive, neutral or negative towards a target word. Both methods follow the same general algorithm presented below which is inspired by Ding et al. \shortcite{Ding08} and is based on a list of sentiment words each associated with a sentiment score representing the polarity and strength of the sentiment word (sentiment lexicon). Both target words, sentiment words and sentiment shifters can in general appear several times in a sentence. Sentiment shifters are words that potentially shift the sentiment of a sentence from positive to negative or negative to positive. E.g. ``not happy'' have the opposite polarity than just ``happy''. Let $tw_i, i \in \{1,2,\ldots,I\}$ represent appearance number $i$ of the target word in the sentence. Further let $sw_{j}, j \in \{1,2,\ldots,J\}$ be appearance number $j$ of a sentiment word in the sentence. Finally let $\textbf{ss} = (ss_1, ss_2, \ldots, ss_K)$ repressent the sentiment shifters in the sentence. We compute a sentiment score, $S$, for the sentence as follows
+In this section we present two methods to classify sentences as either positive, neutral or negative towards a target word. Both methods follow the same general algorithm presented below which is inspired by Ding et al. \shortcite{Ding08} and is based on a list of sentiment words each associated with a sentiment score representing the polarity and strength of the sentiment word (sentiment lexicon). Both target words, sentiment words and sentiment shifters can in general appear several times in a sentence. Sentiment shifters are words that potentially shift the sentiment of a sentence from positive to negative or negative to positive. E.g. ``not happy'' have the opposite polarity than just ``happy''. Let $tw_i, i \in \{1,2,\ldots,I\}$ represent appearance number $i$ of the target word in the sentence. Further let $sw_{j}, j \in \{1,2,\ldots,J\}$ be appearance number $j$ of a sentiment word in the sentence. Finally let $\textbf{ss} = (ss_1, ss_2, \ldots, ss_K)$ represent the sentiment shifters in the sentence. We compute a sentiment score, $S$, for the sentence as follows
 \begin{equation}
   \label{eq:1}
   S = \frac{1}{I}\sum_{i=1}^{I} \sum_{j=1}^{J} \mathbf{imp}(tw_i, sw_{j})\mathbf{shift}(sw_{j}, \mathbf{ss})    
@@ -140,7 +151,7 @@ NP-internal & $14$ & $1/3-2/3$ \\
 \end{table}
 
 \paragraph{Modified scoring function}
-Let $\mathcal{D}$ denote the set of all salient dependency paths. The function $\mathbf{gram}(tw_i, sw_{j})$ returns the dependency path, and if $\mathbf{gram}(tw_i, sw_{j}) \in \mathcal{D}$, then the function $W_{\mathbf{dep}}(tw_i, sw_{j}) \in [0,1]$, returns the importance of the path. Further let $\mathbf{depdist}(tw_i, sw_{j})$ return the dependency distance, as described above. The \textbf{imp} function is computed as follows. If $\mathbf{gram}(tw_i, sw_{j}) \in \mathcal{D}$ we use
+Let $\mathcal{D}$ denote the set of all salient dependency paths. The function $\mathbf{gram}(tw_i, sw_{j})$ returns the dependency path, and if $\mathbf{gram}(tw_i, sw_{j}) \in \mathcal{D}$, then the function $W_{\mathbf{dep}}(tw_i, sw_{j}) \in [0,1]$, returns the salience score of the path. Further let $\mathbf{depdist}(tw_i, sw_{j})$ return the dependency distance, as described above. The \textbf{imp} function is computed as follows. If $\mathbf{gram}(tw_i, sw_{j}) \in \mathcal{D}$ we use
 \begin{align}
   \begin{split}
     \label{eq:3}
@@ -162,7 +173,7 @@ Note that when $\alpha = 0$, \eqref{eq:3} reduces to \eqref{eq:4}.
 
 \subsection{Sentiment corpus}
 
-We did not find any suitable annotated text material related to political discussions in Norwegian and therefore created our own. We manually selected 46 debate articles from the Norwegian online newspapers \textit{NRK Ytring, Dagbladet, Aftenposten, VG and Bergens Tidene}. To each debate article there were attached a discussion thread where readers could express their opinions and feelings towards the content of the debate article. All the text from the debate articles and the subsequent discussions were collected using text scraping \cite{Hammer13}. The debate articles were related to religion and immigration and we wanted to classify the sentiment towards all forms of the following target words: \textit{islam, muslim, quran, allah, muhammed, imam and mosque}. These are topics that typically create a lot of active discussions and disagreements.
+We did not find any suitable annotated text material related to political discussions in Norwegian and therefore created our own. We manually selected 46 debate articles from the Norwegian online newspapers \textit{NRK Ytring, Dagbladet, Aftenposten, VG and Bergens Tidene}. To each debate article there were attached a discussion thread where readers could express their opinions and feelings towards the content of the debate article. All the text from the debate articles and the subsequent discussions were collected using text scraping \cite{Hammer13}. The debate articles were related to religion and immigration and we wanted to classify the sentiment towards all forms of the following target words: \textit{islam, muslim, quran, allah, muhammed, imam and mosque}. These represent topics that typically create a lot of active discussions and disagreements.
 
 We automatically divided the material into sentences and all sentences containing at least one target word and one sentiment word were kept for further analysis. If a sentence contained more than one target word, e.g. both Islam and Quran, the sentence was repeated one time for each target word in the final text material. We could then classify the sentiment towards each of the target words in the sentence consecutively. To assure that we do not underestimate the uncertainty in the statistical analysis, we see each repetition of the sentence as the same sentence with respect to the sentence random effect in the regression model in Section \ref{sec:sa}
 
