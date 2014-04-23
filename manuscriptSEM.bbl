@@ -1,0 +1,132 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citename{Bartlett \bgroup et al.\egroup }2013]{s2}
+Jamie Bartlett, Jonathan Birdwell, and Mark Littler.
+\newblock 2013.
+\newblock {T}he rise of populism in {E}urope can be traced through online
+  behaviour...
+\newblock Demos,
+  \url{http://www.demos.co.uk/files/Demos_OSIPOP_Book-web_03.pdf?1320601634}.
+\newblock [Online; accessed 21-January-2014].
+
+\bibitem[\protect\citename{Bates \bgroup et al.\egroup }2013]{lme4}
+Douglas Bates, Martin Maechler, and Ben Bolker, 2013.
+\newblock {\em lme4: {L}inear mixed-effects models using {S}4 classes}.
+\newblock R package version 0.999999-2.
+
+\bibitem[\protect\citename{Bohnet and Nivre}2012]{Boh:Niv:12}
+Bernd Bohnet and Joakim Nivre.
+\newblock 2012.
+\newblock A transition-based system for joint part-of-speech tagging and
+  labeled non-projective dependency parsing.
+\newblock In {\em Proceedings of the {C}onference on {E}mpirical {M}ethods in
+  {N}atural {L}anguage {P}rocessing}, pages 1455--1465. Association for
+  Computational Linguistics.
+
+\bibitem[\protect\citename{Chen \bgroup et al.\egroup }2010]{Chen10}
+Bi~Chen, Leilei Zhu, Daniel Kifer, and Dongwon Lee.
+\newblock 2010.
+\newblock {W}hat {I}s an {O}pinion {A}bout? {E}xploring {P}olitical
+  {S}tandpoints {U}sing {O}pinion {S}coring {M}odel.
+\newblock In {\em {AAAI}}.
+
+\bibitem[\protect\citename{Dijkstra}1959]{Dij:59}
+E.~W. Dijkstra.
+\newblock 1959.
+\newblock A note on two problems in connexion with graphs.
+\newblock {\em Numerische Mathematik}, 1:269--271.
+
+\bibitem[\protect\citename{Ding \bgroup et al.\egroup }2008]{Ding08}
+Xiaowen Ding, Bing Liu, and Philip~S. Yu.
+\newblock 2008.
+\newblock {A} {H}olistic {L}exicon-based {A}pproach to {O}pinion {M}ining.
+\newblock In {\em {P}roceedings of the 2008 {I}nternational {C}onference on
+  {W}eb {S}earch and {D}ata {M}ining}, WSDM '08, pages 231--240, New York, NY,
+  USA. ACM.
+
+\bibitem[\protect\citename{Goodwin \bgroup et al.\egroup }2013]{r6}
+Matthew Goodwin, Vidhya Ramalingam, and Rachel Briggs.
+\newblock 2013.
+\newblock {T}he {N}ew {R}adical {R}ight: {V}iolent and {N}on-{V}iolent
+  {M}ovements in {E}urope.
+\newblock Institute for Strategic Dialogue,
+  \url{http://www.strategicdialogue.org/ISD%20Far%20Right%20Feb2012.pdf}.
+\newblock [Online; accessed 21-January-2014].
+
+\bibitem[\protect\citename{Issenberg}2012]{Issenberg12}
+Sasha Issenberg.
+\newblock 2012.
+\newblock How {P}resident {O}bama’s campaign used big data to rally
+  individual voters.
+\newblock
+  \url{http://www.technologyreview.com/featuredstory/509026/how-obamas-team-us%
+ed-big-data-to-rally-voters/}.
+\newblock [Online; accessed 21-March-2014].
+
+\bibitem[\protect\citename{Jiang \bgroup et al.\egroup }2011]{Jiang11}
+Long Jiang, Mo~Yu, Ming Zhou, Xiaohua Liu, and Tiejun Zhao.
+\newblock 2011.
+\newblock {T}arget-dependent {T}witter {S}entiment {C}lassification.
+\newblock In {\em {P}roceedings of the 49th {A}nnual {M}eeting of the
+  {A}ssociation for {C}omputational {L}inguistics: {H}uman {L}anguage
+  {T}echnologies - {V}olume 1}, HLT '11, pages 151--160, Stroudsburg, PA, USA.
+  Association for Computational Linguistics.
+
+\bibitem[\protect\citename{Kinn \bgroup et al.\egroup }2014]{Kinn2013}
+Kari Kinn, Pål~Kristian Eriksen, and Per~Erik Solberg.
+\newblock 2014.
+\newblock {NDT} {G}uidelines for {M}orphological and {S}yntactic {A}nnotation.
+\newblock Technical report, National Library of Norway.
+
+\bibitem[\protect\citename{Liu}2012]{Bing12}
+Bing Liu.
+\newblock 2012.
+\newblock {\em {S}entiment {A}nalysis and {O}pinion {M}ining}.
+\newblock Synthesis Lectures on Human Language Technologies. Morgan {\&}
+  Claypool Publishers.
+
+\bibitem[\protect\citename{Nielsen}2011]{Nielsen11}
+Finn~{\AA}rup Nielsen.
+\newblock 2011.
+\newblock A new {ANEW}: Evaluation of a word list for sentiment analysis in
+  microblogs.
+\newblock {\em CoRR}, abs/1103.2903.
+
+\bibitem[\protect\citename{{R Core Team}}2013]{R}
+{R Core Team}, 2013.
+\newblock {\em {R}: {A} {L}anguage and {E}nvironment for {S}tatistical
+  {C}omputing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria.
+
+\bibitem[\protect\citename{Solberg \bgroup et al.\egroup }2014]{Sol14}
+Per~Erik Solberg, Arne Skj{\ae}rholt, Lilja {\O}vrelid, Kristin Hagen, and
+  Janne~Bondi Johannessen.
+\newblock 2014.
+\newblock {T}he {N}orwegian {D}ependency {T}reebank.
+\newblock In {\em {P}roceedings of {LREC} 2014}.
+\newblock Accepted.
+
+\bibitem[\protect\citename{Solberg}2013]{Sol13}
+Per~Erik Solberg.
+\newblock 2013.
+\newblock {B}uilding {G}old-{S}tandard {T}reebanks for {N}orwegian.
+\newblock In {\em {P}roceedings of {NODALIDA} 2013}, {L}inköping {E}lectronic
+  {C}onference {P}roceedings no. 85, pages 459--464, Linköping, Sweden.
+  {L}i{U} {E}lectronic {P}ress.
+
+\bibitem[\protect\citename{Tumasjan \bgroup et al.\egroup }2010]{Tumasjan2010}
+Andranik Tumasjan, Timm~O Sprenger, Philipp~G Sandner, and Isabell~M Welpe.
+\newblock 2010.
+\newblock {P}redicting elections with twitter: {W}hat 140 characters reveal
+  about political sentiment.
+\newblock In {\em {P}roceedings of the fourth international aaai conference on
+  weblogs and social media}, pages 178--185.
+
+\bibitem[\protect\citename{Wilson \bgroup et al.\egroup }2009]{Wil:Wie:Hof:09}
+Theresa Wilson, Janyce Wiebe, and Paul Hoffman.
+\newblock 2009.
+\newblock Recognizing contextual polarity: An exploration of features for
+  phrase-level sentiment analysis.
+\newblock {\em Computational Linguistics}, 35(3):399$\,$--$\,$433.
+
+\end{thebibliography}
