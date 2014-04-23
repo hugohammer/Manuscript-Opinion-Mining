@@ -60,6 +60,26 @@ Hugo Hammer, Alfred Bratterud, and Siri Fagernes.
   to analysis of hate speech in online discussions.
 \newblock In {\em Norwegian informatics conference}.
 
+\bibitem[\protect\citename{Heim and Kratzer}1998]{Heim98}
+Irene Heim and Angelika Kratzer.
+\newblock 1998.
+\newblock {\em {S}emantics in {G}enerative {G}rammar}.
+\newblock Blackwell.
+
+\bibitem[\protect\citename{Hooper and Thompson}1973]{Hooper73}
+Joan~B. Hooper and Sandra~A. Thompson.
+\newblock 1973.
+\newblock {O}n the {A}pplicability of {R}oot {T}ransformations.
+\newblock {\em {L}inguistic {I}nquiry}, 4(4):465--497.
+
+\bibitem[\protect\citename{Hu and Liu}2004]{Hu04}
+Minqing Hu and Bing Liu.
+\newblock 2004.
+\newblock {M}ining and {S}ummarizing {C}ustomer {R}eviews.
+\newblock In {\em {P}roceedings of the {T}enth {ACM} {SIGKDD} {I}nternational
+  {C}onference on {K}nowledge {D}iscovery and {D}ata {M}ining}, KDD '04, pages
+  168--177, New York, NY, USA. ACM.
+
 \bibitem[\protect\citename{Issenberg}2012]{Issenberg12}
 Sasha Issenberg.
 \newblock 2012.
@@ -78,6 +98,12 @@ Long Jiang, Mo~Yu, Ming Zhou, Xiaohua Liu, and Tiejun Zhao.
   {A}ssociation for {C}omputational {L}inguistics: {H}uman {L}anguage
   {T}echnologies - {V}olume 1}, HLT '11, pages 151--160, Stroudsburg, PA, USA.
   Association for Computational Linguistics.
+
+\bibitem[\protect\citename{Joachims}1999]{Joachims99}
+Thorsten Joachims.
+\newblock 1999.
+\newblock Making large-scale {SVM} {L}earning {P}ractical.
+\newblock In {\em Advances in Kernel Methods}.
 
 \bibitem[\protect\citename{Kinn \bgroup et al.\egroup }2014]{Kinn2013}
 Kari Kinn, Pål~Kristian Eriksen, and Per~Erik Solberg.
@@ -104,6 +130,12 @@ Finn~{\AA}rup Nielsen.
 \newblock {\em {R}: {A} {L}anguage and {E}nvironment for {S}tatistical
   {C}omputing}.
 \newblock R Foundation for Statistical Computing, Vienna, Austria.
+
+\bibitem[\protect\citename{Shawe-Taylor and Cristianini}2000]{Shawe00}
+John Shawe-Taylor and Nello Cristianini.
+\newblock 2000.
+\newblock {\em Support Vector Machines}.
+\newblock Cambridge University Press.
 
 \bibitem[\protect\citename{Solberg \bgroup et al.\egroup }2014]{Sol14}
 Per~Erik Solberg, Arne Skj{\ae}rholt, Lilja {\O}vrelid, Kristin Hagen, and
